@@ -1,0 +1,59 @@
+
+Frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ========================
+# REACT / VITE / BUILD
+# ========================
+Frontend/dist/
+dist-ssr/
+build/
+.cache/
+*.local
+
+# ========================
+# TAILWIND CSS
+# ========================
+Frontend/
+tailwind-output.css
+
+# ========================
+# ENVIRONMENT
+# ========================
+Frontend/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ========================
+# EDITOR / IDE
+# ========================
+Frontend/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.sw?
+
+# ========================
+# LOGS
+# ========================
+Frontend/logs/
+*.log
+
+# ========================
+# TESTING
+# ========================
+Frontend/coverage/
+
+# ========================
+# DEPLOY
+# ========================
+Frontend/
+.vercel
+.netlify
