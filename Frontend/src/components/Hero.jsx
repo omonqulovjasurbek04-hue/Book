@@ -33,7 +33,7 @@ export default function Hero() {
   return (
     <section className="px-4 md:px-6 lg:px-10 pb-6 pt-2 md:pt-4 max-w-[1440px] mx-auto">
 
-      {/* Desktop */}
+
       <div className="hidden md:block bg-[#6B4095] rounded-3xl overflow-hidden">
         <div className="flex items-center justify-between px-12 lg:px-16 py-14 lg:py-16 gap-6">
           <div className="max-w-xl">
@@ -64,7 +64,7 @@ export default function Hero() {
 
           <div className="w-[45%] flex flex-col items-center relative">
             <div className="relative w-full max-w-[400px]">
-              {/* Badge */}
+
               <div className="absolute -top-4 left-0 bg-white rounded-2xl rounded-br-none px-5 py-3 text-center z-30 shadow-lg">
                 <p className="text-[#A259FF] text-3xl font-black italic leading-none">10%</p>
                 <p className="text-[#E74291] text-[10px] font-bold leading-none mt-1 uppercase">chegirma</p>
@@ -76,7 +76,7 @@ export default function Hero() {
                 <img src={current.main} alt="Book" className="absolute w-[50%] max-w-[210px] z-20 shadow-2xl rounded-md transition-all duration-500" />
               </div>
 
-              {/* Oval Arrow Ring */}
+
               <div className="absolute bottom-16 left-1/2 w-[110%] -translate-x-1/2 pointer-events-none z-10">
                  <svg viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                    <path d="M 2 40 C 2 75, 298 75, 298 40" stroke="white" strokeWidth="1.5" strokeDasharray="4 4" />
@@ -86,7 +86,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Desktop Controls */}
+
             <div className="flex items-center gap-2 bg-[#007AFF] rounded-full p-2 shadow-lg mt-4 z-30">
               <button
                 onClick={() => goToSlide('prev')}
@@ -109,11 +109,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Mobile */}
+
       <div className="md:hidden">
         <div className="flex flex-col items-center pt-8 pb-6">
           <div className="relative w-full max-w-[320px]">
-            {/* Mobile Badge */}
+
             <div className="absolute -top-4 left-6 bg-white rounded-2xl rounded-br-none px-4 py-2.5 text-center z-30 shadow-lg border border-gray-50">
               <p className="text-[#A259FF] text-2xl font-black italic leading-none">10%</p>
               <p className="text-[#E74291] text-[9px] font-bold leading-none mt-1 uppercase">chegirma</p>
@@ -125,7 +125,7 @@ export default function Hero() {
               <img src={current.main} alt="Book" className="absolute w-[50%] max-w-[150px] z-20 shadow-2xl rounded-md transition-all duration-500" />
             </div>
 
-            {/* Mobile Oval Arrow Ring */}
+
             <div className="absolute bottom-6 left-1/2 w-[110%] -translate-x-1/2 pointer-events-none z-10">
                <svg viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                  <path d="M 2 40 C 2 75, 298 75, 298 40" stroke="#333" strokeOpacity="0.4" strokeWidth="1" strokeDasharray="3 3" />

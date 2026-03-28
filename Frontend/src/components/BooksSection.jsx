@@ -33,7 +33,7 @@ export default function BooksSection() {
   return (
     <section className="px-4 md:px-6 lg:px-10 py-10 md:py-16 max-w-[1440px] mx-auto">
 
-      {/* Desktop */}
+
       <div className="hidden md:flex items-start gap-10 lg:gap-14">
         <div className="w-[260px] lg:w-[280px] flex-shrink-0 pt-2">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#5C3E8A] leading-tight mb-1">
@@ -88,7 +88,7 @@ export default function BooksSection() {
         </div>
       </div>
 
-      {/* Mobile */}
+
       <div className="md:hidden">
         <div className="flex items-center justify-between mb-6">
           <div>
