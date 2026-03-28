@@ -33,6 +33,7 @@ export default function Hero() {
   return (
     <section className="px-4 md:px-6 lg:px-10 pb-6 pt-2 md:pt-4 max-w-[1440px] mx-auto">
 
+      {/* Desktop */}
       <div className="hidden md:block bg-[#6B4095] rounded-3xl overflow-hidden">
         <div className="flex items-center justify-between px-12 lg:px-16 py-14 lg:py-16 gap-6">
           <div className="max-w-xl">
@@ -61,37 +62,45 @@ export default function Hero() {
             </div>
           </div>
 
-
-          <div className="w-[45%] flex flex-col items-center">
-
+          <div className="w-[45%] flex flex-col items-center relative">
             <div className="relative w-full max-w-[400px]">
-              <div className="absolute -top-3 -left-2 bg-white rounded-b-2xl rounded-tr-2xl rounded-tl-sm px-4 py-3 text-center z-30 shadow-lg">
-                <p className="text-[#5C3E8A] text-3xl font-black italic leading-none">10%</p>
+              {/* Badge */}
+              <div className="absolute -top-4 left-0 bg-white rounded-2xl rounded-br-none px-5 py-3 text-center z-30 shadow-lg">
+                <p className="text-[#A259FF] text-3xl font-black italic leading-none">10%</p>
                 <p className="text-[#E74291] text-[10px] font-bold leading-none mt-1 uppercase">chegirma</p>
               </div>
 
-              <div className={`relative w-full h-[340px] lg:h-[380px] flex justify-center items-center transition-opacity duration-500 ${isAnimating ? 'opacity-70' : 'opacity-100'}`}>
+              <div className={`relative w-full h-[380px] lg:h-[420px] flex justify-center items-center transition-opacity duration-500 ${isAnimating ? 'opacity-70' : 'opacity-100'}`}>
                 <img src={current.left} alt="Book" className="absolute w-[45%] max-w-[170px] z-0 -rotate-6 -translate-x-16 shadow-lg rounded-md transition-all duration-500" />
                 <img src={current.right} alt="Book" className="absolute w-[45%] max-w-[170px] z-10 rotate-6 translate-x-16 shadow-lg rounded-md transition-all duration-500" />
                 <img src={current.main} alt="Book" className="absolute w-[50%] max-w-[210px] z-20 shadow-2xl rounded-md transition-all duration-500" />
-                <div className="absolute bottom-2 left-1/2 w-[120%] h-[60px] border border-white/30 rounded-[50%] -translate-x-1/2 translate-y-4" style={{zIndex: 1}} />
+              </div>
+
+              {/* Oval Arrow Ring */}
+              <div className="absolute bottom-16 left-1/2 w-[110%] -translate-x-1/2 pointer-events-none z-10">
+                 <svg viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                   <path d="M 2 40 C 2 75, 298 75, 298 40" stroke="white" strokeWidth="1.5" strokeDasharray="4 4" />
+                   <path d="M 294 45 L 298 40 L 293 35" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                   <path d="M 6 45 L 2 40 L 7 35" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                 </svg>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 mt-6 z-30">
+            {/* Desktop Controls */}
+            <div className="flex items-center gap-2 bg-[#007AFF] rounded-full p-2 shadow-lg mt-4 z-30">
               <button
                 onClick={() => goToSlide('prev')}
-                className="w-11 h-11 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-100 transition shadow-lg"
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#007AFF] hover:bg-gray-50 transition shadow-sm"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="m15 18-6-6 6-6"/>
                 </svg>
               </button>
               <button
                 onClick={() => goToSlide('next')}
-                className="w-11 h-11 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-100 transition shadow-lg"
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#007AFF] hover:bg-gray-50 transition shadow-sm"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="m9 18 6-6-6-6"/>
                 </svg>
               </button>
@@ -100,26 +109,35 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Mobile */}
       <div className="md:hidden">
-        <div className="flex flex-col items-center pt-4 pb-6">
+        <div className="flex flex-col items-center pt-8 pb-6">
           <div className="relative w-full max-w-[320px]">
-            <div className="absolute top-0 left-2 bg-white rounded-b-2xl rounded-tr-2xl rounded-tl-sm px-3.5 py-2 text-center z-30 shadow-lg border border-gray-100">
-              <p className="text-[#A260F0] text-2xl font-black italic leading-none">10%</p>
+            {/* Mobile Badge */}
+            <div className="absolute -top-4 left-6 bg-white rounded-2xl rounded-br-none px-4 py-2.5 text-center z-30 shadow-lg border border-gray-50">
+              <p className="text-[#A259FF] text-2xl font-black italic leading-none">10%</p>
               <p className="text-[#E74291] text-[9px] font-bold leading-none mt-1 uppercase">chegirma</p>
             </div>
 
-            <div className={`relative w-full h-[260px] flex justify-center items-center mt-4 transition-opacity duration-500 ${isAnimating ? 'opacity-70' : 'opacity-100'}`}>
+            <div className={`relative w-full h-[280px] flex justify-center items-center mt-2 transition-opacity duration-500 ${isAnimating ? 'opacity-70' : 'opacity-100'}`}>
               <img src={current.left} alt="Book" className="absolute w-[45%] max-w-[130px] z-0 -rotate-6 -translate-x-10 shadow-lg rounded-md transition-all duration-500" />
               <img src={current.right} alt="Book" className="absolute w-[45%] max-w-[130px] z-10 rotate-6 translate-x-10 shadow-lg rounded-md transition-all duration-500" />
               <img src={current.main} alt="Book" className="absolute w-[50%] max-w-[150px] z-20 shadow-2xl rounded-md transition-all duration-500" />
-              <div className="absolute bottom-1 left-1/2 w-[110%] h-[40px] border border-gray-300 rounded-[50%] -translate-x-1/2 translate-y-2" style={{zIndex: 1}} />
+            </div>
+
+            {/* Mobile Oval Arrow Ring */}
+            <div className="absolute bottom-6 left-1/2 w-[110%] -translate-x-1/2 pointer-events-none z-10">
+               <svg viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                 <path d="M 2 40 C 2 75, 298 75, 298 40" stroke="#333" strokeOpacity="0.4" strokeWidth="1" strokeDasharray="3 3" />
+                 <path d="M 294 45 L 298 40 L 293 35" stroke="#333" strokeOpacity="0.4" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+               </svg>
             </div>
           </div>
 
-          <div className="flex gap-3 mt-6 z-30">
+          <div className="flex gap-4 mt-6 z-30">
             <button
               onClick={() => goToSlide('prev')}
-              className="w-10 h-10 border border-gray-300 bg-white rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-50 transition shadow-sm"
+              className="w-11 h-11 border border-[#007AFF] bg-white rounded-full flex items-center justify-center text-[#007AFF] hover:bg-blue-50 transition"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m15 18-6-6 6-6"/>
@@ -127,7 +145,7 @@ export default function Hero() {
             </button>
             <button
               onClick={() => goToSlide('next')}
-              className="w-10 h-10 border border-gray-300 bg-white rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-50 transition shadow-sm"
+              className="w-11 h-11 border border-[#007AFF] bg-white rounded-full flex items-center justify-center text-[#007AFF] hover:bg-blue-50 transition"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m9 18 6-6-6-6"/>
@@ -137,7 +155,7 @@ export default function Hero() {
         </div>
 
         <div className="px-2 pt-4">
-          <h1 className="text-gray-900 text-[1.75rem] font-bold leading-[1.2] mb-3 uppercase">
+          <h1 className="text-gray-900 text-[1.65rem] font-bold leading-[1.2] mb-3 uppercase">
             Angelfaces to'plamini{' '}
             <span className="text-[#FF8A65]">10%</span>{' '}
             chegirma bilan sotib oling.

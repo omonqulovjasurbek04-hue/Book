@@ -4,20 +4,20 @@ import books2 from '../assets/Books2.png'
 import books3 from '../assets/Books3.png'
 
 const flags = [
-  { country: 'Ingliz', emoji: '🇬🇧' },
-  { country: "O'zbek", emoji: '🇺🇿' },
-  { country: 'Rus', emoji: '🇷🇺' },
-  { country: 'Arab', emoji: '🇸🇦' },
-  { country: 'Fransuz', emoji: '🇫🇷' },
-  { country: 'Kares', emoji: '🇰🇷' },
-  { country: 'Ispan', emoji: '🇪🇸' },
-  { country: 'Xitoy', emoji: '🇨🇳' },
+  { country: 'Ingliz', code: 'gb' },
+  { country: "O'zbek", code: 'uz' },
+  { country: 'Rus', code: 'ru' },
+  { country: 'Arab', code: 'sa' },
+  { country: 'Fransuz', code: 'fr' },
+  { country: 'Kares', code: 'kr' },
+  { country: 'Ispan', code: 'es' },
+  { country: 'Xitoy', code: 'cn' },
 ]
 
 const books = [
-  { img: books1, title: 'Children English', subtitle: 'BOOK 1', bg: 'bg-blue-100/60' },
-  { img: books2, title: 'Children English', subtitle: 'BOOK 2', bg: 'bg-pink-100/60' },
-  { img: books3, title: 'Children English', subtitle: 'BOOK 3', bg: 'bg-purple-100/60' },
+  { img: books1, title: 'Children English', subtitle: 'BOOK 1', bg: 'bg-[#E5F0FF]' },
+  { img: books2, title: 'Children English', subtitle: 'BOOK 2', bg: 'bg-[#FFE8DE]' },
+  { img: books3, title: 'Children English', subtitle: 'BOOK 2', bg: 'bg-[#F6E8FF]' },
 ]
 
 export default function BooksSection() {
@@ -33,28 +33,33 @@ export default function BooksSection() {
   return (
     <section className="px-4 md:px-6 lg:px-10 py-10 md:py-16 max-w-[1440px] mx-auto">
 
+      {/* Desktop */}
       <div className="hidden md:flex items-start gap-10 lg:gap-14">
         <div className="w-[260px] lg:w-[280px] flex-shrink-0 pt-2">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-1">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#5C3E8A] leading-tight mb-1">
             8ta tilda
           </h2>
-          <p className="text-gray-500 text-base mb-5">
+          <p className="text-[#5C3E8A]/80 text-base mb-6 font-medium">
             Ingliz tilini o'rganing
           </p>
 
-          <div className="grid grid-cols-4 gap-3 mb-6">
+          <div className="grid grid-cols-4 gap-3 mb-8">
             {flags.map((flag, idx) => (
               <div
                 key={idx}
-                className="w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl cursor-pointer hover:scale-110 hover:shadow-md transition-all duration-200"
+                className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200 border border-gray-100 shadow-sm"
                 title={flag.country}
               >
-                {flag.emoji}
+                <img 
+                  src={`https://flagcdn.com/w80/${flag.code}.png`} 
+                  alt={flag.country} 
+                  className="w-full h-full object-cover"
+                />
               </div>
             ))}
           </div>
 
-          <button className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold px-7 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-purple-200 text-sm">
+          <button className="bg-[#B944D6] hover:bg-[#a135bd] text-white font-semibold px-8 py-3.5 rounded-full transition-colors duration-300 text-sm w-full lg:w-auto shadow-md">
             Buyurtma berish
           </button>
         </div>
@@ -83,29 +88,34 @@ export default function BooksSection() {
         </div>
       </div>
 
+      {/* Mobile */}
       <div className="md:hidden">
-        <div className="flex items-start justify-between mb-2">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 leading-tight italic">
+            <h2 className="text-2xl font-bold text-[#5C3E8A] leading-tight">
               8ta tilda
             </h2>
-            <p className="text-gray-500 text-sm mt-0.5">
+            <p className="text-[#5C3E8A]/80 text-sm mt-0.5 font-medium">
               Ingliz tilini o'rganing
             </p>
           </div>
-          <button className="bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold px-5 py-2.5 rounded-full text-sm shadow-md mt-1">
+          <button className="bg-[#B944D6] hover:bg-[#a135bd] text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-md transition-colors">
             Buyurtma berish
           </button>
         </div>
 
-        <div className="flex items-center gap-2.5 mt-4 mb-6 overflow-x-auto pb-1">
+        <div className="grid grid-cols-4 gap-4 mb-8">
           {flags.map((flag, idx) => (
             <div
               key={idx}
-              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xl flex-shrink-0"
+              className="w-12 h-12 mx-auto rounded-full overflow-hidden flex items-center justify-center cursor-pointer border border-gray-100 shadow-sm"
               title={flag.country}
             >
-              {flag.emoji}
+              <img 
+                src={`https://flagcdn.com/w80/${flag.code}.png`} 
+                alt={flag.country} 
+                className="w-full h-full object-cover"
+              />
             </div>
           ))}
         </div>
@@ -141,7 +151,7 @@ export default function BooksSection() {
         <div className="flex justify-center gap-3 mt-5">
           <button
             onClick={() => scrollCards('prev')}
-            className="w-10 h-10 border border-gray-300 bg-white rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-50 transition shadow-sm"
+            className="w-10 h-10 border border-[#007AFF] bg-white rounded-full flex items-center justify-center text-[#007AFF] hover:bg-blue-50 transition shadow-sm"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m15 18-6-6 6-6"/>
@@ -149,7 +159,7 @@ export default function BooksSection() {
           </button>
           <button
             onClick={() => scrollCards('next')}
-            className="w-10 h-10 border border-gray-300 bg-white rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-50 transition shadow-sm"
+            className="w-10 h-10 border border-[#007AFF] bg-white rounded-full flex items-center justify-center text-[#007AFF] hover:bg-blue-50 transition shadow-sm"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m9 18 6-6-6-6"/>
