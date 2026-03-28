@@ -6,12 +6,10 @@ export default function Navbar() {
   return (
     <header className="relative z-50">
       <nav className="flex items-center justify-between px-5 md:px-10 lg:px-16 py-4 max-w-[1440px] mx-auto">
-        {/* Mobile Logo */}
         <a href="#" className="md:hidden text-xl font-bold text-orange-400 tracking-wider uppercase">
           LOGO
         </a>
 
-        {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-1">
           <a href="#" className="px-4 py-2 text-gray-800 font-medium text-[15px] hover:text-purple-600 transition-colors">
             Главная
@@ -27,14 +25,11 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Right side */}
         <div className="flex items-center gap-2 md:gap-4">
-          {/* Language */}
           <button className="flex items-center gap-1 text-gray-700 text-sm font-medium px-2 py-1.5 hover:text-purple-600 transition-colors">
             Uzb <span className="text-xs">▾</span>
           </button>
 
-          {/* CTA Button */}
           <a
             href="#contact"
             className="border border-purple-400 text-purple-700 text-xs md:text-sm font-medium px-3 py-1.5 md:px-5 md:py-2 rounded-full hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-300"
@@ -42,7 +37,6 @@ export default function Navbar() {
             Biz bilan bog'lanish
           </a>
 
-          {/* Mobile Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden flex flex-col items-center justify-center w-9 h-9"
@@ -55,12 +49,10 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       {menuOpen && (
         <div className="md:hidden fixed inset-0 bg-black/30 z-40" onClick={() => setMenuOpen(false)} />
       )}
 
-      {/* Mobile Menu */}
       <div className={`md:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
           <span className="text-lg font-bold text-purple-700">Menu</span>
