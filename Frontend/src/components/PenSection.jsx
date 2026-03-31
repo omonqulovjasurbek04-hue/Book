@@ -42,14 +42,14 @@ const steps = [
 
 export default function PenSection() {
   return (
-    <section className="px-4 md:px-6 lg:px-10 py-10 md:py-16 max-w-[1440px] mx-auto mb-25">
+    <section className="px-4 md:px-6 lg:px-10 py-10 md:py-16 max-w-1440px mx-auto mb-25">
       <div className="hidden md:block">
         <div className="bg-[#F8F4FF] rounded-3xl px-10 lg:px-16 py-12 lg:py-14">
           <div className="flex items-center gap-10 lg:gap-16">
 
-            <div className="w-[42%] lg:w-[38%] flex-shrink-0 flex justify-center">
+            <div className="w-42% lg:w-38% flex-shrink-0 flex justify-center">
               <div className="relative">
-                <div className="w-[300px] h-[300px] lg:w-[350px] lg:h-[350px] rounded-full bg-[#FDDCC4] flex items-center justify-center relative">
+                <div className="w-300px h-300px lg:w-350px lg:h-350px rounded-full bg-[#FDDCC4] flex items-center justify-center relative">
 
                   <div className="absolute top-12 right-4 flex flex-col gap-1">
                     <div className="w-5 h-5 border-r-2 border-t-2 border-[#FF6B35] rounded-tr-full opacity-60"></div>

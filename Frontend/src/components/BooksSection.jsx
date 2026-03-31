@@ -31,11 +31,11 @@ export default function BooksSection() {
   }
 
   return (
-    <section className="px-4 md:px-6 lg:px-10 py-10 md:py-16 max-w-[1440px] mx-auto">
+    <section className="px-4 md:px-6 lg:px-10 py-10 md:py-16 max-w-1440px mx-auto">
 
 
       <div className="hidden md:flex items-start gap-10 lg:gap-14">
-        <div className="w-[260px] lg:w-[280px] flex-shrink-0 pt-2">
+        <div className="w-260px lg:w-280px flex-shrink-0 pt-2">
           <h2 className="text-3xl lg:text-4xl font-bold text-[#5C3E8A] leading-tight mb-1">
             8ta tilda
           </h2>
@@ -130,11 +130,11 @@ export default function BooksSection() {
                 key={idx}
                 className={`${book.bg} rounded-2xl p-4 flex flex-col items-center min-w-[48%] flex-shrink-0`}
               >
-                <div className="relative w-full h-[160px] flex items-center justify-center mb-3">
+                <div className="relative w-full h-160px flex items-center justify-center mb-3">
                   <img
                     src={book.img}
                     alt={book.title}
-                    className="max-h-full max-w-[120px] object-contain drop-shadow-lg -rotate-3"
+                    className="max-h-full max-w-120px object-contain drop-shadow-lg -rotate-3"
                   />
                 </div>
                 <h3 className="text-gray-900 font-bold text-sm text-center">

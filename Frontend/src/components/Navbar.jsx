@@ -5,7 +5,7 @@ export default function Navbar() {
 
   return (
     <header className="relative z-50">
-      <nav className="flex items-center justify-between px-5 md:px-10 lg:px-16 py-4 max-w-[1440px] mx-auto">
+      <nav className="flex items-center justify-between px-5 md:px-10 lg:px-16 py-4 max-w-1440px mx-auto">
         <a href="#" className="md:hidden text-xl font-bold text-orange-400 tracking-wider uppercase">
           LOGO
         </a>
@@ -42,9 +42,9 @@ export default function Navbar() {
             className="md:hidden flex flex-col items-center justify-center w-9 h-9"
             aria-label="Menu"
           >
-            <span className={`block w-5 h-[2px] bg-purple-600 rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`}></span>
-            <span className={`block w-5 h-[2px] bg-purple-600 rounded-full mt-[4px] transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-3.5 h-[2px] bg-purple-600 rounded-full mt-[4px] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[6px] w-5' : ''}`}></span>
+            <span className={`block w-5 h-2px bg-purple-600 rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-6px' : ''}`}></span>
+            <span className={`block w-5 h-2px bg-purple-600 rounded-full mt-4px transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-3.5 h-2px bg-purple-600 rounded-full mt-4px transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-6px w-5' : ''}`}></span>
           </button>
         </div>
       </nav>
@@ -53,12 +53,12 @@ export default function Navbar() {
         <div className="md:hidden fixed inset-0 bg-black/30 z-40" onClick={() => setMenuOpen(false)} />
       )}
 
-      <div className={`md:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`md:hidden fixed top-0 right-0 h-full w-260px bg-white shadow-2xl z-50 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
           <span className="text-lg font-bold text-purple-700">Menu</span>
           <button onClick={() => setMenuOpen(false)} className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
             <svg className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"/>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
