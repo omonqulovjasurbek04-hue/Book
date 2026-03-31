@@ -1,149 +1,119 @@
 import { useState } from 'react'
-import { useLanguage, translations } from '../context/LanguageContext'
 import booksImg from '../assets/Books1.png'
 
 export default function OrderForm() {
-  const { language } = useLanguage()
-  const t = translations[language]
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    agreed: false,
-  })
+  const [formData, setFormData] = useState({ name: '', phone: '', agreed: false })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [error, setError] = useState('')
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }))
+    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setError('')
-    setSuccess(false)
-
-    if (!formData.name.trim()) {
-      setError(t.enterName)
-      return
-    }
-    if (!formData.phone.trim()) {
-      setError(t.enterPhone)
-      return
-    }
-    if (!formData.agreed) {
-      setError(t.agree)
-      return
-    }
-
     setLoading(true)
-
-    try {
-      // TODO: API endpoint'ni o'zingizga mosla
-      // const response = await fetch('/api/orders', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
-      // if (!response.ok) throw new Error('Xatolik yuz berdi')
-      
-      // Hozircha demo uchun:
-      setTimeout(() => {
-        setSuccess(true)
-        setFormData({ name: '', phone: '', agreed: false })
-        setLoading(false)
-      }, 800)
-    } catch (err) {
-      setError(err.message || 'Xatolik yuz berdi')
+    setTimeout(() => {
+      setSuccess(true)
+      setFormData({ name: '', phone: '', agreed: false })
       setLoading(false)
-    }
+    }, 800)
   }
 
   return (
-    <section id="contact" className="px-4 py-12 md:py-16 max-w-[1440px] mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+    <section id="contact" className="px-5 max-w-[1240px] mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8 min-h-[400px]">
         
-        {/* Chap tomon: Chegirma kartasi */}
-        <div className="bg-[#E5F0FF] rounded-[32px] p-8 flex items-center justify-between overflow-hidden relative animate-slideInUp">
-          <div className="z-10">
-            <h3 className="text-[#007AFF] text-2xl font-black uppercase mb-2">{t.discount} <span className="text-3xl">{t.discountPercent}</span></h3>
-            <p className="text-gray-500 mb-6">{t.buyNow}</p>
-            <div className="bg-white rounded-2xl p-4 shadow-md inline-block transform transition-all hover:scale-105">
-              <p className="text-gray-400 line-through text-sm">{t.priceFull}</p>
-              <p className="text-[#E74291] text-2xl font-black">{t.priceDiscount}</p>
+        {/* Chap blok: Chegirma ma'lumoti */}
+        <div className="bg-[#e4efff] rounded-[24px] p-8 md:p-10 flex flex-col relative overflow-hidden group">
+          <div className="z-10 relative">
+            <h3 className="text-[#51368a] text-[1.4rem] md:text-3xl font-black uppercase mb-1 leading-tight tracking-wide">
+              SIZNING<br />
+              <span className="flex items-center gap-2">CHEGIRMANGIZ <span className="text-[#de897f] text-4xl md:text-[2.5rem]">10%</span></span>
+            </h3>
+            
+            <div className="text-[#333] text-xs font-semibold mb-6 mt-6">
+              <p>Chegirma boshlanadi: 25 mart</p>
+              <p>Chegirma tugaydi: 24 aprel</p>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-[#51368a] font-bold text-lg mb-1">Audio kurs narxi</p>
+              <p className="text-gray-400 font-bold line-through text-sm">1.200.000 so'm</p>
+              <p className="text-[#ec6e47] text-[1.7rem] font-black">533.000 so'm</p>
             </div>
           </div>
-          <img src={booksImg} className="w-40 md:w-60 absolute -right-5 bottom-0 rotate-12 drop-shadow-2xl" alt="Books" />
+          
+          <img 
+            src={booksImg} 
+            className="w-[200px] md:w-[280px] absolute right-[-20px] bottom-[-30px] z-[5] drop-shadow-xl" 
+            alt="Books bundle" 
+          />
         </div>
 
-        {/* O'ng tomon: Forma */}
-        <div className="bg-[#F6E8FF] rounded-[32px] p-8 animate-slideInUp" style={{animationDelay: '0.2s'}}>
-          <h3 className="text-[#4A2D7A] text-xl font-bold mb-6">{t.fillForm}</h3>
+        {/* O'ng blok: Forma */}
+        <div className="bg-[#e6ebff] rounded-[24px] p-8 md:p-10 flex flex-col justify-center">
+          <h3 className="text-[#51368a] text-lg md:text-xl font-black uppercase tracking-wide mb-8">
+            BUYURTMA BERISH UCHUN<br />
+            FORMANI TO'LDIRING
+          </h3>
           
           {success && (
-            <div className="mb-4 p-4 bg-green-100 text-green-700 rounded-xl text-sm font-semibold animate-slideInUp">
-              {t.success}
-            </div>
-          )}
-          
-          {error && (
-            <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-xl text-sm font-semibold animate-slideInUp">
-              {t.error} {error}
+            <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm font-semibold">
+              Buyurtmangiz qabul qilindi!
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder={t.enterName}
-              className="w-full px-5 py-3 rounded-xl border-none focus:ring-2 focus:ring-purple-500 outline-none transition-all transform focus:scale-105"
-              required
-            />
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder={t.enterPhone}
-              className="w-full px-5 py-3 rounded-xl border-none focus:ring-2 focus:ring-purple-500 outline-none transition-all transform focus:scale-105"
-              required
-            />
-            <div className="flex items-start gap-2 py-2">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            
+            <div className="border-b border-gray-300 pb-2">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Ism"
+                className="w-full bg-transparent border-none focus:ring-0 outline-none text-[#51368a] placeholder-gray-400 text-[15px] font-medium px-2"
+                required
+              />
+            </div>
+            
+            <div className="border-b border-gray-300 pb-2">
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Telefon"
+                className="w-full bg-transparent border-none focus:ring-0 outline-none text-[#51368a] placeholder-gray-400 text-[15px] font-medium px-2"
+                required
+              />
+            </div>
+
+            <div className="flex items-start gap-3 mt-2">
               <input
                 type="checkbox"
-                id="terms"
+                id="agreed"
                 name="agreed"
                 checked={formData.agreed}
                 onChange={handleChange}
-                className="mt-1 w-4 h-4 cursor-pointer"
+                className="mt-0.5 w-4 h-4 cursor-pointer accent-[#cd40cd]"
                 required
               />
-              <label htmlFor="terms" className="text-xs text-gray-500 cursor-pointer">
-                {t.agree}
+              <label htmlFor="agreed" className="text-xs text-[#555] cursor-pointer leading-tight">
+                Barcha yoshdagi shu tillarga qiziqadigan barchaga kurslarimiz
               </label>
             </div>
+
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#B944D6] text-white font-bold py-4 rounded-xl hover:bg-[#a135bd] transition-all shadow-lg uppercase disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
+              className="mt-2 w-[180px] bg-[#cc40ce] hover:bg-[#b034b1] text-white font-bold py-3.5 rounded-full text-sm shadow-md transition-colors"
             >
-              {loading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  {t.waiting}
-                </>
-              ) : (
-                t.submit
-              )}
+              Buyurtma berish
             </button>
+
           </form>
         </div>
 

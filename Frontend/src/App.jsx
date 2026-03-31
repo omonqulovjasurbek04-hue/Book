@@ -7,48 +7,39 @@ import FeaturesGrid from './components/FeaturesGrid'
 import StepsSection from './components/StepsSection'
 import ReviewSection from './components/ReviewSection'
 import OrderForm from './components/OrderForm'
-import DiagonalStripe from './components/DiagonalStripe'
+import DualMarquee from './components/DualMarquee'
+import Footer from './components/Footer' // Biz Footerini alohida yozamiz
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-sans text-gray-900 pb-0">
       <Navbar />
       <main className="pt-16">
         <Hero />
         
-        {/* Yuguruvchi satr - animated */}
-        <div className="bg-gradient-to-r from-[#6B4095] via-[#7B5BAB] to-[#6B4095] py-3 overflow-hidden whitespace-nowrap text-white font-bold uppercase tracking-widest animate-pulse">
-           Angelfaces to'plamini 10% chegirma bilan sotib oling! • Angelfaces to'plamini 10% chegirma bilan sotib oling!
-        </div>
-
+        {/* Kitoblar Qismi (8ta tilda) */}
         <BooksSection />
-        <DiagonalStripe bgGradient="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400" />
         
+        {/* Ruchka Qismi */}
         <PenSection />
-        <DiagonalStripe bgGradient="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500" />
         
+        {/* Robot Ustoz (Maktab uchun va h.k) */}
         <FeaturesGrid />
-        <DiagonalStripe bgGradient="bg-gradient-to-r from-purple-500 via-purple-600 to-purple-500" />
         
-        <StepsSection />
-        <DiagonalStripe bgGradient="bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500" />
+        {/* Figma Dizayni: Yashil/Binafsha aylanma chiziqlar */}
+        <DualMarquee />
         
-        <OrderForm />
+        {/* Oq fon blok: Qator va Forma */}
+        <div className="w-full bg-white pb-10">
+          <StepsSection />
+          <OrderForm />
+        </div>
+        
+        {/* Natijalar (Sharhlar) */}
         <ReviewSection />
       </main>
       
-      <footer className="bg-gray-50 py-10 border-t border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-xl font-black text-purple-700">ANGELFACES</div>
-          <div className="flex gap-6 text-sm text-gray-500 font-medium">
-            <a href="#" className="hover:text-purple-600">Bosh sahifa</a>
-            <a href="#books" className="hover:text-purple-600">To'plamlar</a>
-            <a href="#reviews" className="hover:text-purple-600">Natijalar</a>
-            <a href="#contact" className="hover:text-purple-600">Aloqa</a>
-          </div>
-          <p className="text-xs text-gray-400">© 2026 Barcha huquqlar himoyalangan.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
@@ -59,4 +50,4 @@ export default function App() {
       <AppContent />
     </LanguageProvider>
   )
-}
+}
