@@ -76,7 +76,13 @@ const steps = [
 ]
 
 export default function PenSection() {
-  const { setModalOpen } = useContext(ModalContext)
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   return (
     <section className="w-full py-16 md:py-20 mb-10 bg-[#FCFAFF]">
@@ -141,8 +147,8 @@ export default function PenSection() {
               </div>
 
               <button 
-                onClick={() => setModalOpen(true)}
-                className="bg-[#cc4ac1] hover:bg-[#b53fa9] text-white font-semibold px-8 py-3.5 rounded-full transition-transform duration-300 transform hover:scale-105 shadow-md"
+                onClick={scrollToContact}
+                className="bg-[#cc4ac1] hover:bg-[#b53fa9] text-white font-semibold px-8 py-3.5 rounded-full transition-transform duration-300 transform hover:scale-105 shadow-md cursor-pointer"
               >
                 Buyurtma berish
               </button>
@@ -232,8 +238,8 @@ export default function PenSection() {
             </div>
 
             <button 
-              onClick={() => setModalOpen(true)}
-              className="w-full bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-bold py-3.5 rounded-[30px] transition-all duration-300 text-[15px] shadow-[0_4px_12px_rgba(186,67,205,0.3)]"
+              onClick={scrollToContact}
+              className="w-full bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-bold py-3.5 rounded-[30px] transition-all duration-300 text-[15px] shadow-[0_4px_12px_rgba(186,67,205,0.3)] cursor-pointer"
             >
               Buyurtma berish
             </button>

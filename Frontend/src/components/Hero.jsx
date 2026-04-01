@@ -13,7 +13,14 @@ const bookSets = [
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
-  const { setModalOpen } = useContext(ModalContext)
+
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   const goToSlide = (direction) => {
     if (isAnimating) return
@@ -48,7 +55,7 @@ export default function Hero() {
               </p>
 
               <button 
-                onClick={() => setModalOpen(true)}
+                onClick={scrollToContact}
                 className="bg-[#D6E8FD] hover:bg-blue-200 text-purple-900 font-bold px-8 py-3.5 rounded-full transition-colors text-base mb-6 cursor-pointer"
               >
                 Buyurtma berish
@@ -227,7 +234,7 @@ export default function Hero() {
           </p>
 
           <button 
-            onClick={() => setModalOpen(true)}
+            onClick={scrollToContact}
             className="w-full bg-gradient-to-r from-[#E066FF] to-[#9B59B6] hover:from-[#D055EE] hover:to-[#8A48A5] text-white font-bold px-8 py-4 rounded-full transition-all text-base mb-5 shadow-md cursor-pointer"
           >
             Buyurtma berish

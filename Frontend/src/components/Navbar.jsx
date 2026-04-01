@@ -15,6 +15,15 @@ export default function Navbar() {
   const [selectedLang, setSelectedLang] = useState(languages[0]) // Eng
   const { setModalOpen } = useContext(ModalContext)
 
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMenuOpen(false);
+  }
+
   // Dropdown uchun tashqari bosilganda yopish funksiyasi
   const langRef = useRef(null)
   useEffect(() => {
@@ -85,7 +94,7 @@ export default function Navbar() {
           </div>
           
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={scrollToContact}
             className="border-2 border-[#51368a] text-[#51368a] text-[14px] font-bold px-7 py-2 rounded-full hover:bg-[#51368a] hover:text-white transition-all duration-300 whitespace-nowrap cursor-pointer"
           >
             Biz bilan bog'lanish
@@ -130,7 +139,7 @@ export default function Navbar() {
           </div>
 
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={scrollToContact}
             className="border-[1.5px] border-[#c0a2f4] text-[#51368a] text-[11px] font-bold px-3 py-[5px] rounded-full focus:ring-2 focus:ring-purple-200 hover:bg-[#51368a] hover:text-white transition-all duration-300 shadow-sm cursor-pointer"
           >
             Biz bilan bog'lanish
@@ -168,10 +177,7 @@ export default function Navbar() {
           <a href="#" className="px-4 py-3 rounded-xl text-gray-700 font-medium hover:bg-purple-50 transition-colors">Контакты</a>
           <hr className="my-2 border-gray-100" />
           <button 
-            onClick={() => {
-              setModalOpen(true);
-              setMenuOpen(false);
-            }} 
+            onClick={scrollToContact} 
             className="text-center bg-purple-600 text-white font-medium px-5 py-2.5 rounded-xl hover:bg-purple-700 transition-colors cursor-pointer"
           >
             Biz bilan bog'lanish

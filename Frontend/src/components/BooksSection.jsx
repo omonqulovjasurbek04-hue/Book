@@ -97,7 +97,15 @@ export default function BooksSection() {
   const [scrollPos, setScrollPos] = useState(0)
   const [selectedLang, setSelectedLang] = useState(flags[0])
   const [activeMobileBook, setActiveMobileBook] = useState(null)
-  const { setModalOpen } = useContext(ModalContext)
+
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   const scrollCards = (direction) => {
     setScrollPos((prev) => {
@@ -178,7 +186,7 @@ export default function BooksSection() {
                   </svg>
                 </div>
                 <div 
-                  onClick={() => setModalOpen(true)}
+                  onClick={scrollToContact}
                   className="flex-1 flex items-center justify-center hover:bg-white/40 transition-colors cursor-pointer"
                 >
                   <span className="text-purple-700 font-bold text-[13px] tracking-wide pointer-events-none">Buyurtma qilish</span>
@@ -202,7 +210,7 @@ export default function BooksSection() {
             </p>
           </div>
           <button 
-            onClick={() => setModalOpen(true)}
+            onClick={scrollToContact}
             className="bg-[#c24cd2] text-white font-medium px-5 py-2 rounded-full text-[13px] shadow-[0_4px_12px_rgba(186,67,205,0.3)] transform transition-active active:scale-95"
           >
             Buyurtma berish
@@ -275,10 +283,7 @@ export default function BooksSection() {
                     </svg>
                   </div>
                   <div 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setModalOpen(true);
-                    }}
+                    onClick={scrollToContact}
                     className="flex-[1.2] flex items-center justify-center active:bg-black/10 transition-colors cursor-pointer"
                   >
                     <span className="text-[#2b3576] font-bold text-[11px] tracking-wide text-center">Buyurtma qilish</span>
