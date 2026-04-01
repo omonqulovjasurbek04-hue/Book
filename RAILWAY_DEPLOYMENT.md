@@ -70,15 +70,33 @@ CORS_ALLOWED_ORIGINS=https://SIZNING-FRONTEND.up.railway.app
 
 ---
 
-## 🗄️ 3. MySQL Database Qo'shish
+## 🗄️ 3. MySQL Bazasini (Database) Ulash
 
-1. Loyiha ichida **+ New** → **Database** → **MySQL**
-2. Database yaratilgach, uning **Variables** bo'limidan:
-   - `MYSQLHOST` → Backend `DB_HOST` ga
-   - `MYSQLPORT` → Backend `DB_PORT` ga
-   - `MYSQLDATABASE` → Backend `DB_DATABASE` ga
-   - `MYSQLUSER` → Backend `DB_USERNAME` ga
-   - `MYSQLPASSWORD` → Backend `DB_PASSWORD` ga
+Railway'da loyihangiz ma'lumotlarni saqlashi uchun baza yaratish kerak. Buni juda oson, 2 qadamda bajaramiz:
+
+### 1-Qadam: Railway da MySQL Yaratish
+1. Railway loyihangiz ekranida tepadagi **+ New** katta tugmasini bosing.
+2. Ro'yxatdan **Database** bo'limini tanlang.
+3. Keyin **MySQL** ni tanlang.
+4. Tayyor! Railway sizga darhol o'zining xavfsiz bazasini yaratib beradi.
+
+### 2-Qadam: Baza parollarini Backend'ga yozish
+Endi yaratilgan bazani kodingiz (Backend) tanib olishi kerak. Buning uchun MySQL ning parollarini Backend ga beramiz:
+
+1. Ro'yxatdagi yangi **MySQL** kubigiga bosing va uning **Variables** bo'limiga o'ting. Siz u yerda `MYSQLHOST`, `MYSQLPASSWORD` kabi yozuvlarni ko'rasiz.
+2. Endi ro'yxatdan o'zingizning **Backend** (Laravel) kubigingizga bosing va uning ham **Variables** bo'limiga boring.
+3. Backend variables oynasiga pastdagi chap tomondagi nomlarni yozib, ularga MySQL dan olingan qiymatlarni tenglashtiring:
+
+| Laravel xohlaydigan yozuv (Backend da) | Railway MySQL bergan ruxsatnoma (MySQL dan nusxalaysiz) |
+|----------------------------------------|---------------------------------------------------------|
+| `DB_CONNECTION=mysql`                  | O'zgarishsiz qoladi ("mysql" deb yozasiz)               |
+| `DB_HOST=`                             | MySQL dagi **`MYSQLHOST`** qarshisidagi yozuv (masalan: roundhouse.railway.app) |
+| `DB_PORT=`                             | MySQL dagi **`MYSQLPORT`** qarshisidagi son (masalan: 3306) |
+| `DB_DATABASE=`                         | MySQL dagi **`MYSQLDATABASE`** nomi (odatda railway)    |
+| `DB_USERNAME=`                         | MySQL dagi **`MYSQLUSER`** nomi (odatda root)           |
+| `DB_PASSWORD=`                         | MySQL dagi **`MYSQLPASSWORD`** qarshisidagi uzun maxfiy kod |
+
+❗️ **Qisqacha qoida:** MySQL variables oynasida nima berilgan bo'lsa, Backend dagi DB_... konfiguratsiyasiga xuddi shuni "nusxalab-qo'yasiz" (copy-paste).
 
 ---
 
