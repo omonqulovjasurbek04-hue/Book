@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { ModalContext } from '../App'
 import books1 from '../assets/Books1.png'
 import books2 from '../assets/Books2.png'
 import books3 from '../assets/Books3.png'
@@ -10,15 +11,15 @@ const flags = [
   { country: 'Rus', code: 'ru' },
   { country: 'Arab', code: 'sa' },
   { country: 'Fransuz', code: 'fr' },
-  { country: 'Kares', code: 'kr' },
+  { country: 'Koreys', code: 'kr' },
   { country: 'Ispan', code: 'es' },
   { country: 'Xitoy', code: 'cn' },
 ]
 
 const books = [
-  { img: books1, title: 'Children English', subtitle: 'BOOK 1', bg: 'bg-blue-50', lang: 'Eng', langCode: 'gb' },
-  { img: books2, title: 'Children English', subtitle: 'BOOK 2', bg: 'bg-orange-50', lang: 'Fran', langCode: 'fr' },
-  { img: books3, title: 'Children English', subtitle: 'BOOK 3', bg: 'bg-fuchsia-50', lang: 'Rus', langCode: 'ru' },
+  { img: books1, title: 'Children English', subtitle: 'BOOK 1', bg: 'bg-blue-50' },
+  { img: books2, title: 'Children English', subtitle: 'BOOK 2', bg: 'bg-orange-50' },
+  { img: books3, title: 'Children English', subtitle: 'BOOK 3', bg: 'bg-fuchsia-50' },
 ]
 
 const features = [
@@ -94,12 +95,16 @@ const steps = [
 
 export default function BooksSection() {
   const [scrollPos, setScrollPos] = useState(0)
+  const [selectedLang, setSelectedLang] = useState(flags[0])
+  const [activeMobileBook, setActiveMobileBook] = useState(null)
+  const { setModalOpen } = useContext(ModalContext)
 
   const scrollCards = (direction) => {
     setScrollPos((prev) => {
       if (direction === 'next') return Math.min(prev + 1, books.length - 2)
       return Math.max(prev - 1, 0)
     })
+    setActiveMobileBook(null) // Hide bottom bar when scrolling
   }
 
   return (
@@ -108,30 +113,41 @@ export default function BooksSection() {
       <div className="hidden md:flex items-start justify-between gap-10 lg:gap-20">
         
         <div className="w-72 shrink-0 pt-2 flex flex-col">
-          <h2 className="text-8 font-extrabold text-purple-900 leading-tight mb-2">
+          <h2 className="text-[2rem] lg:text-[2.5rem] font-extrabold text-purple-900 leading-tight mb-2">
             8ta tilda
           </h2>
-          <p className="text-purple-400 text-base mb-8 font-medium">
-            Ingliz tilini o'rganing
+          <p className="text-[#a379df] text-base mb-8 font-medium">
+            {selectedLang.country} tilini o'rganing
           </p>
 
-          <div className="grid grid-cols-4 gap-x-2 gap-y-3 mb-8 w-fit">
-            {flags.map((flag, idx) => (
-              <div
-                key={idx}
-                className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200 border border-gray-100 shadow-sm"
-                title={flag.country}
-              >
-                <img 
-                  src={`https://flagcdn.com/w80/${flag.code}.png`} 
-                  alt={flag.country} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+          <div className="grid grid-cols-4 gap-x-3 gap-y-4 mb-8 w-fit">
+            {flags.map((flag, idx) => {
+              const isActive = selectedLang.code === flag.code;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => setSelectedLang(flag)}
+                  className={`w-11 h-11 rounded-full overflow-hidden flex items-center justify-center cursor-pointer transition-all duration-300 ${
+                    isActive 
+                      ? 'ring-4 ring-purple-500 scale-110 shadow-lg' 
+                      : 'border border-gray-100 shadow-sm hover:scale-105 hover:ring-2 hover:ring-purple-300'
+                  }`}
+                  title={flag.country}
+                >
+                  <img 
+                    src={`https://flagcdn.com/w80/${flag.code}.png`} 
+                    alt={flag.country} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )
+            })}
           </div>
 
-          <button className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-medium px-8 py-3 rounded-full transition-colors duration-300 text-sm shadow-md w-max">
+          <button 
+            onClick={() => setModalOpen(true)}
+            className="bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-medium px-8 py-3.5 rounded-full transition-all duration-300 text-sm shadow-[0_4px_12px_rgba(186,67,205,0.3)] w-max cursor-pointer"
+          >
             Buyurtma berish
           </button>
         </div>
@@ -151,25 +167,28 @@ export default function BooksSection() {
                   />
                 </div>
                 <div className="flex flex-col items-center gap-1.5">
-                  <h3 className="text-gray-900 font-bold text-base xl:text-4 text-center">
+                  <h3 className="text-gray-900 font-bold text-base xl:text-[17px] text-center">
                     {book.title}
                   </h3>
-                  <p className="text-purple-400 font-semibold text-sm text-center uppercase tracking-wide">
+                  <p className="text-[#a379df] font-semibold text-sm text-center uppercase tracking-wide">
                     {book.subtitle}
                   </p>
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 w-full h-14 border-t border-white/60 flex translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-black/5 backdrop-blur-md z-10">
-                <div className="flex-1 flex items-center justify-center gap-2 border-r border-white/60 hover:bg-white/30 transition-colors">
-                  <img src={`https://flagcdn.com/w80/${book.langCode}.png`} alt={book.lang} className="w-5 h-5 rounded-full object-cover shadow-sm ring-1 ring-white/50" />
-                  <span className="text-gray-800 font-semibold text-sm">{book.lang}</span>
-                  <svg width="8" height="5" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-500">
+              <div className="absolute bottom-0 left-0 w-full h-14 border-t border-white/60 flex translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/20 backdrop-blur-md z-10">
+                <div className="flex-1 flex items-center justify-center gap-2 border-r border-white/60 hover:bg-white/40 transition-colors">
+                  <img src={`https://flagcdn.com/w80/${selectedLang.code}.png`} alt={selectedLang.country} className="w-5 h-5 rounded-full object-cover shadow-sm ring-1 ring-white/50" />
+                  <span className="text-gray-900 font-semibold text-[13px]">{selectedLang.country}</span>
+                  <svg width="8" height="5" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-600">
                     <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <div className="flex-1 flex items-center justify-center hover:bg-white/30 transition-colors">
-                  <span className="text-blue-900 font-bold text-sm tracking-wide">Buyurtma qilish</span>
+                <div 
+                  onClick={() => setModalOpen(true)}
+                  className="flex-1 flex items-center justify-center hover:bg-white/40 transition-colors cursor-pointer"
+                >
+                  <span className="text-purple-700 font-bold text-[13px] tracking-wide pointer-events-none">Buyurtma qilish</span>
                 </div>
               </div>
 
@@ -178,85 +197,134 @@ export default function BooksSection() {
         </div>
       </div>
 
-     <div className="md:hidden">
-        <div className="bg-[#fcfaff] rounded-3xl pt-16 pb-8 px-5 mb-10 flex flex-col items-center shadow-sm">
-          <div className="flex flex-col items-center mb-10 w-full">
-            
-            <div className="w-[260px] h-[260px] rounded-full bg-[#ef9c86] flex items-center justify-center relative shadow-sm">
-              
-              {/* Left Waves */}
-              <svg className="absolute left-[8%] bottom-[20%] opacity-90 w-[50px] h-[70px]" viewBox="0 0 55 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 C 30 20, 30 60, 50 75" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                <path d="M38 12 C 22 25, 22 55, 38 68" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                <path d="M26 20 C 15 30, 15 50, 26 60" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-              </svg>
-
-              {/* Right Waves */}
-              <svg className="absolute right-[8%] top-[20%] opacity-90 w-[50px] h-[70px]" viewBox="0 0 55 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 5 C 25 20, 25 60, 5 75" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                <path d="M17 12 C 33 25, 33 55, 17 68" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                <path d="M29 20 C 40 30, 40 50, 29 60" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-              </svg>
-
-              <img
-                src={ruchka}
-                alt="Ovoz chiqaruvchi ruchka"
-                className="absolute h-[118%] w-auto object-contain z-10 drop-shadow-2xl"
-              />
-            </div>
-
-            <button className="mt-8 bg-[#6a4f91] hover:bg-[#5b3e83] text-white rounded-full px-6 py-[10px] flex items-center gap-3 shadow-[0_4px_10px_rgba(106,76,149,0.3)] transition-colors">
-              <div className="w-[22px] h-[22px] border border-white rounded-full flex items-center justify-center">
-                <svg className="w-2.5 h-2.5 text-white ml-[2px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-              </div>
-              <span className="text-[13px] font-medium tracking-wide">Videosini ko'rish</span>
-            </button>
-          </div>
-
-          <div className="w-full text-left mb-6 pl-1">
-            <h2 className="text-[#594285] text-[20px] font-bold uppercase leading-snug w-[80%]">
-              Ovoz chiqaruvchi ruchka
+      {/* ================= MOBIL KORINISH ================= */}
+      <div className="md:hidden flex flex-col pt-0 pb-4 px-1">
+        
+        {/* Yuqori qism: Sarlavha va Tugma */}
+        <div className="flex justify-between items-center mb-5">
+          <div className="flex flex-col">
+            <h2 className="text-[20px] font-bold text-[#51368a] leading-tight mb-1">
+              8ta tilda
             </h2>
+            <p className="text-[#a379df] text-[12px] font-medium">
+              {selectedLang.country} tilini o'rganing
+            </p>
           </div>
-
-          <div className="w-full space-y-3.5 mb-8 pl-1">
-            {features.map((feature, idx) => (
-              <div key={idx} className="flex items-center gap-3">
-                <svg className="w-[22px] h-[22px] text-[#6a4f91] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-                <span className="text-[#333] text-[13px] font-medium leading-snug">{feature}</span>
-              </div>
-            ))}
-          </div>
-
-          <button className="w-full bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-bold py-[14px] rounded-full transition-all duration-300 text-[15px] shadow-[0_4px_12px_rgba(186,67,205,0.3)]">
+          <button 
+            onClick={() => setModalOpen(true)}
+            className="bg-[#c24cd2] text-white font-medium px-5 py-2 rounded-full text-[13px] shadow-[0_4px_12px_rgba(186,67,205,0.3)] transform transition-active active:scale-95"
+          >
             Buyurtma berish
           </button>
         </div>
 
-        <div className="flex flex-col gap-4">
-          {steps.map((step, idx) => (
-            <div
-              key={idx}
-              className={`relative bg-gradient-to-r ${step.gradient} rounded-2xl px-5 py-6 flex flex-col justify-between min-h-32 overflow-hidden group`}
-            >
-              <div className="w-11 h-11 text-white z-10 mb-4 opacity-100">{step.icon}</div>
-              <div className="z-10">
-                <p className="text-white font-semibold text-sm leading-snug w-5/6">{step.text}</p>
-              </div>
-              
+        {/* Bayroqlar qatori */}
+        <div className="flex gap-3 overflow-x-auto pt-2 pb-6 px-2 -mx-2 mb-2 flex-nowrap" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {flags.map((flag, idx) => {
+            const isActive = selectedLang.code === flag.code;
+            return (
               <div
-                className="absolute -bottom-5 -right-5 w-32 h-32 text-white opacity-30 group-hover:scale-110 transition-transform duration-500"
-                style={{ transform: step.watermarkTransform || 'none' }}
+                key={idx}
+                onClick={() => setSelectedLang(flag)}
+                className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center cursor-pointer transition-all border ${
+                  isActive 
+                    ? 'ring-2 ring-[#c24cd2] ring-offset-2 scale-[1.15] shadow-md border-transparent' 
+                    : 'shadow-sm border-gray-200'
+                }`}
               >
-                {step.icon}
+                <div className="w-full h-full rounded-full overflow-hidden">
+                  <img 
+                    src={`https://flagcdn.com/w80/${flag.code}.png`} 
+                    alt={flag.country} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
+
+        {/* Kitoblar Karuseli */}
+        <div className="relative w-full overflow-hidden mb-6">
+          <div 
+            className="flex transition-transform duration-300 ease-in-out gap-4"
+            style={{ transform: `translateX(calc(-${scrollPos * 50}% - ${scrollPos * 8}px))` }}
+          >
+            {books.map((book, idx) => {
+              const shortLang = { gb: 'Eng', uz: 'Uzb', ru: 'Rus', sa: 'Ara', fr: 'Fran', kr: 'Kor', es: 'Isp', cn: 'Xit' }
+              return (
+              <div
+                key={idx}
+                onClick={() => setActiveMobileBook(activeMobileBook === idx ? null : idx)}
+                className={`w-[calc(50%-8px)] shrink-0 ${book.bg} rounded-[20px] pb-5 pt-5 flex flex-col items-center shadow-sm relative overflow-hidden transition-all duration-300`}
+              >
+                {/* Kitob kitobiga yorug'lik effektli bezak (ixtiyoriy) */}
+                <div className="absolute top-0 right-0 w-8 h-32 bg-white/30 skew-x-[30deg] translate-x-12"></div>
+                
+                <div className={`w-full flex items-center justify-center mb-4 xl:h-auto h-[120px] transition-transform duration-300 ${activeMobileBook === idx ? '-translate-y-4' : 'translate-y-0'}`}>
+                  <img src={book.img} alt={book.title} className="w-[85%] max-h-full object-contain drop-shadow-[0_8px_15px_rgba(0,0,0,0.25)] relative z-10 pointer-events-none" />
+                </div>
+                
+                <div className={`flex flex-col items-center transition-transform duration-300 ${activeMobileBook === idx ? '-translate-y-4' : 'translate-y-0'} pointer-events-none`}>
+                  <h3 className="text-gray-900 font-bold text-[13px] text-center px-1 leading-snug">
+                    {book.title}
+                  </h3>
+                  <p className="text-[#a379df] font-semibold text-[10px] text-center uppercase mt-1 tracking-wide">
+                    {book.subtitle}
+                  </p>
+                </div>
+
+                {/* Mobil uchun pastki panel (bosilganda chiqadi) */}
+                <div 
+                  className={`absolute bottom-0 left-0 w-full h-11 bg-black/5 flex border-t border-white/60 transition-transform duration-300 z-20 ${
+                    activeMobileBook === idx ? 'translate-y-0' : 'translate-y-full'
+                  }`}
+                >
+                  <div className="flex-[0.8] flex items-center justify-center gap-1.5 border-r border-white/60">
+                    <img src={`https://flagcdn.com/w80/${selectedLang.code}.png`} alt={selectedLang.country} className="w-3.5 h-3.5 rounded-full object-cover shadow-[0_1px_2px_rgba(0,0,0,0.2)]" />
+                    <span className="text-gray-800 font-medium text-[11px]">{shortLang[selectedLang.code]}</span>
+                    <svg width="6" height="4" viewBox="0 0 10 6" fill="none" className="text-gray-600">
+                      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModalOpen(true);
+                    }}
+                    className="flex-[1.2] flex items-center justify-center active:bg-black/10 transition-colors cursor-pointer"
+                  >
+                    <span className="text-[#2b3576] font-bold text-[11px] tracking-wide text-center">Buyurtma qilish</span>
+                  </div>
+                </div>
+              </div>
+            )})}
+          </div>
+        </div>
+
+        {/* Arrow tugmalari (Karusel boshqaruvi) */}
+        <div className="flex justify-center items-center gap-4">
+          <button 
+            onClick={() => scrollCards('prev')} 
+            disabled={scrollPos === 0}
+            className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${scrollPos === 0 ? 'border-gray-200 text-gray-300' : 'border-gray-400 text-gray-600 active:bg-gray-100'}`}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          
+          <button 
+            onClick={() => scrollCards('next')} 
+            disabled={scrollPos >= books.length - 2}
+            className={`w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${scrollPos >= books.length - 2 ? 'border-gray-200 text-gray-300' : 'border-gray-400 text-gray-600 active:bg-gray-100'}`}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+
       </div>
 
     </section>

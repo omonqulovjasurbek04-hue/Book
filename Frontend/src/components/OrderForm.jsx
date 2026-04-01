@@ -28,60 +28,67 @@ export default function OrderForm() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 min-h-auto flex items-stretch">
         
         {/* Chap blok: Chegirma ma'lumoti */}
-        <div className="bg-[#eaf1ff] rounded-[20px] p-6 sm:p-8 md:p-12 flex flex-col relative overflow-hidden min-h-[440px] md:min-h-[559px] w-full">
+        <div className="bg-[#eaf1ff] rounded-[20px] p-6 pb-[250px] md:pb-12 md:p-12 flex flex-col relative overflow-hidden min-h-[440px] md:min-h-[559px] w-full">
           
           {/* Orqadagi pushti foni (Ellipse 307) - Figmadan olingan gradient va piksellar */}
-          <div className="absolute top-[200px] -right-[100px] md:top-[269px] md:-right-[169px] w-[350px] md:w-[529px] aspect-square bg-gradient-to-b from-[#e98f8e] to-[#eeae8c] rounded-full pointer-events-none z-0"></div>
+          <div className="absolute top-[200px] -right-[100px] md:top-[269px] md:-right-[169px] w-[350px] md:w-[529px] aspect-square bg-gradient-to-b from-[#e98f8e] to-[#eeae8c] rounded-full pointer-events-none z-0 hidden md:block"></div>
 
           <div className="z-10 relative flex flex-col h-full">
-            <h3 className="text-[#594285] text-2xl sm:text-3xl md:text-[38px] font-bold uppercase leading-snug tracking-wide">
+            <h3 className="text-[#594285] text-[22px] md:text-[38px] font-bold uppercase leading-tight tracking-wide">
               SIZNING
             </h3>
-            {/* Ostiga aniq chegaralangan chiziq */}
-            <div className="flex items-baseline gap-2 md:gap-3 mt-1 border-b-2 border-[#b5a7db] pb-1 md:pb-2 w-max max-w-full">
-              <span className="text-[#594285] text-[22px] sm:text-3xl md:text-[38px] font-bold uppercase tracking-wide">CHEGIRMANGIZ</span>
-              <span className="text-[#f1957c] text-[40px] sm:text-[55px] md:text-[75px] font-black leading-none">10%</span>
+            {/* Ostiga aniq chegaralangan chiziq (faqat desktop da) */}
+            <div className="flex items-center gap-1.5 md:gap-3 mt-0.5 md:mt-1 border-b-0 md:border-b-2 border-[#b5a7db] pb-0 md:pb-2 w-max max-w-full">
+              <span className="text-[#594285] text-[22px] md:text-[38px] font-bold uppercase tracking-wide">CHEGIRMANGIZ</span>
+              <span className="text-[#f1957c] text-[38px] md:text-[75px] font-bold leading-none">10%</span>
             </div>
             
-            <div className="text-gray-700 text-[13px] md:text-[14px] mt-8 md:mt-10 mb-6 md:mb-8 space-y-1.5 font-medium">
-              <p>Chegirma boshlanadi: <span className="font-bold text-gray-900">25 mart</span></p>
-              <p>Chegirma tugaydi: <span className="font-bold text-gray-900">24 aprel</span></p>
+            <div className="text-gray-800 text-[13.5px] md:text-[14px] mt-6 md:mt-10 mb-8 space-y-2 font-medium">
+              <p>Chegirma boshlanadi: <span className="font-bold text-black">25 mart</span></p>
+              <p>Chegirma tugaydi: <span className="font-bold text-black">24 aprel</span></p>
             </div>
 
-            <div className="mt-4 mb-48 md:mb-0">
-              <p className="text-[#674f98] font-bold text-lg md:text-[24px] mb-1 md:mb-2">Audio kurs narxi</p>
-              <p className="text-[#f1957c] font-medium line-through decoration-2 opacity-80 text-[16px] md:text-[18px]">
+            <div className="mt-2 text-left w-full h-full flex flex-col justify-start">
+              <p className="text-[#674f98] font-bold text-[17px] md:text-[24px] mb-2 uppercase tracking-wide">Audio kurs narxi</p>
+              <p className="text-[#f1957c] font-medium line-through decoration-1 opacity-70 text-[18px] md:text-[18px] mb-0.5">
                 1.200.000 so'm
               </p>
-              <p className="text-[#f1957c] text-[28px] md:text-[36px] font-black mt-1">
+              <p className="text-[#f1957c] text-[28px] md:text-[36px] font-bold tracking-tight">
                 533.000 so'm
               </p>
             </div>
           </div>
           
-          {/* Books Cluster - Anchor by TOP distance to prevent vertical text collisions */}
-          <div className="absolute right-0 top-0 w-full h-full z-20 pointer-events-none">
-             {/* Book 3 (Left, chap tarafdagi qiya kitob) */}
+          {/* Books Cluster - MOBIL uchun (rasmdagi 255x255 joylashuvga asoslangan) */}
+          <div className="absolute -bottom-[20px] -right-[20px] w-[255px] h-[255px] md:hidden z-20 pointer-events-none">
+             {/* Chapdagi ko'k kitob (Book 3) */}
              <img 
                src={books3} 
-               className="absolute w-[120px] md:w-[167px] top-[240px] md:bottom-auto md:top-[299px] right-[130px] md:right-[217px] -rotate-[29deg] drop-shadow-xl opacity-95 transition-transform z-0" 
+               className="absolute w-[125px] top-[45px] left-[0px] -rotate-[12deg] drop-shadow-[0_8px_12px_rgba(0,0,0,0.2)] opacity-95 z-0" 
                alt="Book 3" 
              />
              
-             {/* Book 2 (Right, o'ng tarafdagi orqa kitob) */}
+             {/* Orqadagi qizil-sariq kitob (Book 2) */}
              <img 
                src={books2} 
-               className="absolute w-[110px] md:w-[154px] top-[230px] md:bottom-auto md:top-[279px] -right-[20px] md:-right-[61px] rotate-0 drop-shadow-lg opacity-90 transition-transform z-[5]" 
+               className="absolute w-[110px] top-[15px] right-[40px] rotate-[8deg] drop-shadow-md opacity-90 z-[5]" 
                alt="Book 2" 
              />
              
-             {/* Book 1 (Front, asosiy kitob, 15 gradus burilgan) */}
+             {/* Oldidagi asosiy katta kitob (Book 1) */}
              <img 
                src={books1} 
-               className="absolute w-[170px] md:w-[235px] top-[180px] md:bottom-auto md:top-[222px] right-[30px] md:right-[66px] rotate-[15deg] z-10 transition-transform" 
-               style={{ filter: 'drop-shadow(-4px 0px 13px rgba(0,0,0,0.2))' }}
+               className="absolute w-[170px] top-[50px] -right-[5px] rotate-[15deg] z-10" 
+               style={{ filter: 'drop-shadow(-4px 0px 15px rgba(0,0,0,0.25))' }}
                alt="Book 1" 
              />
+          </div>
+
+          {/* Books Cluster - DESKTOP uchun (oldin yig'ilgan joylashuv) */}
+          <div className="absolute right-0 top-0 w-full h-full z-20 pointer-events-none hidden md:block">
+             <img src={books3} className="absolute w-[167px] top-[299px] right-[217px] -rotate-[29deg] drop-shadow-xl opacity-95 z-0" alt="Book 3" />
+             <img src={books2} className="absolute w-[154px] top-[279px] -right-[61px] rotate-0 drop-shadow-lg opacity-90 z-[5]" alt="Book 2" />
+             <img src={books1} className="absolute w-[235px] top-[222px] right-[66px] rotate-[15deg] z-10" style={{ filter: 'drop-shadow(-4px 0px 13px rgba(0,0,0,0.2))' }} alt="Book 1" />
           </div>
         </div>
 

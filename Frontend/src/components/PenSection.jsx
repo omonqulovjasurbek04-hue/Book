@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ModalContext } from '../App'
 import ruchka from '../assets/ruchka.png'
 
 const features = [
@@ -74,99 +75,191 @@ const steps = [
   },
 ]
 
-
 export default function PenSection() {
+  const { setModalOpen } = useContext(ModalContext)
+
   return (
     <section className="w-full py-16 md:py-20 mb-10 bg-[#FCFAFF]">
-      <div className="w-full max-w-[1240px] mx-auto px-6 lg:px-10 flex flex-col items-center">
+      <div className="w-full max-w-[1240px] mx-auto px-6 lg:px-10">
         
-        {/* Yuqori blok: Ruchka va Ma'lumotlar */}
-        <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-[1000px] gap-12 lg:gap-24 mb-20 relative">
-          
-          {/* Chap tomon: Rasm */}
-          <div className="relative flex-shrink-0 w-72 md:w-80 lg:w-96 flex justify-center">
-            {/* Olovrang fon doirasi */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-80 md:h-80 lg:w-[380px] lg:h-[380px] rounded-full bg-[#f3ae99] z-0 shadow-inner"></div>
+        {/* ================= DESKTOP KORINISH ================= */}
+        <div className="hidden md:flex flex-col items-center w-full">
+          {/* Yuqori blok: Ruchka va Ma'lumotlar */}
+          <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-[1000px] gap-12 lg:gap-24 mb-20 relative">
             
-            {/* Oq ingichka chiziqlar (To'lqin effekti) */}
-            <svg
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] z-10 pointer-events-none opacity-90"
-              viewBox="0 0 200 200"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M 50 150 C 30 120, 30 80, 50 50" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M 65 135 C 50 115, 50 85, 65 65" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M 150 150 C 170 120, 170 80, 150 50" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M 135 135 C 150 115, 150 85, 135 65" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
+            {/* Chap tomon: Rasm */}
+            <div className="relative flex-shrink-0 w-72 md:w-80 lg:w-96 flex justify-center">
+              {/* Olovrang fon doirasi */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-80 md:h-80 lg:w-[380px] lg:h-[380px] rounded-full bg-[#f3ae99] z-0 shadow-inner"></div>
+              
+              {/* Oq ingichka chiziqlar (To'lqin effekti) */}
+              <svg
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] z-10 pointer-events-none opacity-90"
+                viewBox="0 0 200 200"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M 50 150 C 30 120, 30 80, 50 50" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 65 135 C 50 115, 50 85, 65 65" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 150 150 C 170 120, 170 80, 150 50" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 135 135 C 150 115, 150 85, 135 65" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
 
-            {/* Ruchka rasmi */}
-            <img
-              src={ruchka}
-              alt="Ovoz chiqaruvchi ruchka"
-              className="w-[85%] object-contain relative z-20 hover:scale-105 transition-transform duration-500 drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)] -rotate-6"
-            />
+              {/* Ruchka rasmi */}
+              <img
+                src={ruchka}
+                alt="Ovoz chiqaruvchi ruchka"
+                className="w-[85%] object-contain relative z-20 hover:scale-105 transition-transform duration-500 drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)] -rotate-6"
+              />
 
-            {/* Videosini ko'rish tugmasi */}
-            <button className="absolute -left-10 md:-left-16 top-1/4 bg-[#5E4C8E] hover:bg-[#4d3d75] text-white rounded-full pr-5 pl-2 py-2 flex items-center gap-3 shadow-[0_5px_15px_rgba(94,76,142,0.4)] transition-all z-30 hover:scale-105">
-              <div className="w-8 h-8 border border-white rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-white ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
+              {/* Videosini ko'rish tugmasi */}
+              <button className="absolute left-1/2 -translate-x-1/2 -bottom-4 md:bottom-auto md:-translate-x-0 md:-left-16 md:top-1/4 bg-[#5E4C8E] hover:bg-[#4d3d75] text-white rounded-full pr-5 pl-2 py-2 flex items-center gap-3 shadow-[0_5px_15px_rgba(94,76,142,0.4)] transition-all z-30 hover:scale-105">
+                <div className="w-8 h-8 border border-white rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+                <span className="text-sm font-medium tracking-wide">Videosini ko'rish</span>
+              </button>
+            </div>
+
+            {/* O'ng tomon: Matnlar */}
+            <div className="flex-1 w-full flex flex-col items-start px-2">
+              <h2 className="text-[#51368a] text-[1.65rem] md:text-3xl lg:text-[2rem] font-black uppercase mb-8 leading-tight tracking-wide">
+                OVOZ CHIQARUVCHI <br /> RUCHKA
+              </h2>
+
+              <div className="space-y-4 mb-10 w-full">
+                {features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-3.5">
+                    <svg className="w-[22px] h-[22px] text-[#51368a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    <span className="text-[#333] font-medium lg:text-[17px]">{feature}</span>
+                  </div>
+                ))}
               </div>
-              <span className="text-sm font-medium tracking-wide">Videosini ko'rish</span>
-            </button>
+
+              <button 
+                onClick={() => setModalOpen(true)}
+                className="bg-[#cc4ac1] hover:bg-[#b53fa9] text-white font-semibold px-8 py-3.5 rounded-full transition-transform duration-300 transform hover:scale-105 shadow-md"
+              >
+                Buyurtma berish
+              </button>
+            </div>
+
           </div>
 
-          {/* O'ng tomon: Matnlar */}
-          <div className="flex-1 w-full flex flex-col items-start px-2">
-            <h2 className="text-[#51368a] text-[1.65rem] md:text-3xl lg:text-[2rem] font-black uppercase mb-8 leading-tight tracking-wide">
-              OVOZ CHIQARUVCHI <br /> RUCHKA
-            </h2>
+          {/* Pastki blok: 3 ta qadam (Gradient Cards) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8 justify-center w-full">
+            {steps.map((step, idx) => (
+              <div
+                key={idx}
+                className={`relative bg-gradient-to-r ${step.gradient} rounded-[24px] p-6 lg:p-7 overflow-hidden min-h-[150px] flex flex-col justify-start cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group`}
+              >
+                {/* Icon qismi: Oq rang, tepada */}
+                <div className="text-white z-10 opacity-100 mb-6 w-8 h-8 opacity-80">
+                  {step.icon}
+                </div>
+                
+                <div className="z-10 mt-auto">
+                  <p className="text-white font-bold text-base leading-tight w-11/12">{step.text}</p>
+                </div>
+                
+                {/* Suv belgisi fon burchakda */}
+                <div className="absolute -bottom-8 -right-8 w-36 h-36 text-white opacity-20 transition-transform duration-500 group-hover:scale-110 pointer-events-none">
+                  {step.icon}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-            <div className="space-y-4 mb-10 w-full">
-              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-3.5">
-                  <svg className="w-[22px] h-[22px] text-[#51368a] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+        {/* ================= MOBIL KORINISH ================= */}
+        <div className="md:hidden w-full">
+          <div className="bg-transparent pt-4 pb-4 px-4 flex flex-col items-center w-full">
+            <div className="flex flex-col items-center mb-12 w-full relative">
+              
+              <div className="w-[280px] h-[280px] rounded-full bg-[#ef9c86] flex items-center justify-center relative shadow-sm mb-6 mt-2 overflow-visible">
+                
+                {/* Left Waves */}
+                <svg className="absolute left-[8%] bottom-[20%] opacity-90 w-[50px] h-[70px]" viewBox="0 0 55 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M50 5 C 30 20, 30 60, 50 75" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                  <path d="M38 12 C 22 25, 22 55, 38 68" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                  <path d="M26 20 C 15 30, 15 50, 26 60" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                </svg>
+
+                {/* Right Waves */}
+                <svg className="absolute right-[8%] top-[20%] opacity-90 w-[50px] h-[70px]" viewBox="0 0 55 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 5 C 25 20, 25 60, 5 75" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                  <path d="M17 12 C 33 25, 33 55, 17 68" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                  <path d="M29 20 C 40 30, 40 50, 29 60" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                </svg>
+
+                <img
+                  src={ruchka}
+                  alt="Ovoz chiqaruvchi ruchka"
+                  className="absolute h-[115%] w-auto object-contain z-10 drop-shadow-2xl -rotate-6"
+                />
+              </div>
+
+              {/* Videosini ko'rish - Mobil ekran qoidalariga ko'ra o'rtada va pastda turadi */}
+              <button className="bg-[#6a4f91] hover:bg-[#5b3e83] text-white rounded-[30px] px-6 py-2 flex items-center gap-3 shadow-[0_4px_12px_rgba(106,76,149,0.3)] transition-transform hover:scale-105 z-20 absolute -bottom-5">
+                <div className="w-[24px] h-[24px] border-[1.5px] border-white rounded-full flex items-center justify-center shrink-0">
+                  <svg className="w-3 h-3 text-white ml-[2px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
                   </svg>
-                  <span className="text-[#333] font-medium lg:text-[17px]">{feature}</span>
+                </div>
+                <span className="text-[13px] font-medium tracking-wide">Videosini ko'rish</span>
+              </button>
+            </div>
+
+            <div className="w-full text-left mb-5 pl-1">
+              <h2 className="text-[#594285] text-[22px] font-bold uppercase leading-snug w-[80%]">
+                Ovoz chiqaruvchi ruchka
+              </h2>
+            </div>
+
+            <div className="w-full space-y-4 mb-8 pl-1">
+              {features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <svg className="w-[20px] h-[20px] text-[#6a4f91] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                  <span className="text-[#333] text-[14px] font-medium leading-snug">{feature}</span>
                 </div>
               ))}
             </div>
 
-            <button className="bg-[#cc4ac1] hover:bg-[#b53fa9] text-white font-semibold px-8 py-3.5 rounded-full transition-transform duration-300 transform hover:scale-105 shadow-md">
+            <button 
+              onClick={() => setModalOpen(true)}
+              className="w-full bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-bold py-3.5 rounded-[30px] transition-all duration-300 text-[15px] shadow-[0_4px_12px_rgba(186,67,205,0.3)]"
+            >
               Buyurtma berish
             </button>
           </div>
 
+          <div className="flex flex-col gap-4">
+            {steps.map((step, idx) => (
+              <div
+                key={idx}
+                className={`relative bg-gradient-to-r ${step.gradient} rounded-2xl px-5 py-6 flex flex-col justify-between min-h-32 overflow-hidden group`}
+              >
+                <div className="w-11 h-11 text-white z-10 mb-4 opacity-100">{step.icon}</div>
+                <div className="z-10">
+                  <p className="text-white font-semibold text-sm leading-snug w-5/6">{step.text}</p>
+                </div>
+                
+                <div
+                  className="absolute -bottom-5 -right-5 w-32 h-32 text-white opacity-30 group-hover:scale-110 transition-transform duration-500"
+                  style={{ transform: step.watermarkTransform || 'none' }}
+                >
+                  {step.icon}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* Pastki blok: 3 ta qadam (Gradient Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8 justify-center w-full">
-          {steps.map((step, idx) => (
-            <div
-              key={idx}
-              className={`relative bg-gradient-to-r ${step.gradient} rounded-[24px] p-6 lg:p-7 overflow-hidden min-h-[150px] flex flex-col justify-start cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group`}
-            >
-              {/* Icon qismi: Oq rang, tepada */}
-              <div className="text-white z-10 opacity-100 mb-6 w-8 h-8 opacity-80">
-                {step.icon}
-              </div>
-              
-              <div className="z-10 mt-auto">
-                <p className="text-white font-bold text-base leading-tight w-11/12">{step.text}</p>
-              </div>
-              
-              {/* Suv belgisi fon burchakda */}
-              <div className="absolute -bottom-8 -right-8 w-36 h-36 text-white opacity-20 transition-transform duration-500 group-hover:scale-110 pointer-events-none">
-                {step.icon}
-              </div>
-            </div>
-          ))}
-        </div>
-        
       </div>
     </section>
   )

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { ModalContext } from '../App'
 import books1 from '../assets/Books1.png'
 import books2 from '../assets/Books2.png'
 import books3 from '../assets/Books3.png'
@@ -12,6 +13,7 @@ const bookSets = [
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const { setModalOpen } = useContext(ModalContext)
 
   const goToSlide = (direction) => {
     if (isAnimating) return
@@ -45,7 +47,10 @@ export default function Hero() {
                 Ingliz, Rus, Xitoy, Fransuz, Kares, Ispan, O'zbek va Arab tillarini tez va oson o'rganing!
               </p>
 
-              <button className="bg-[#D6E8FD] hover:bg-blue-200 text-purple-900 font-bold px-8 py-3.5 rounded-full transition-colors text-base mb-6">
+              <button 
+                onClick={() => setModalOpen(true)}
+                className="bg-[#D6E8FD] hover:bg-blue-200 text-purple-900 font-bold px-8 py-3.5 rounded-full transition-colors text-base mb-6 cursor-pointer"
+              >
                 Buyurtma berish
               </button>
 
@@ -221,7 +226,10 @@ export default function Hero() {
             Ingliz, Rus, Xitoy, Fransuz, Kares, Ispan, O'zbek va Arab tillarini tez va oson o'rganing!
           </p>
 
-          <button className="w-full bg-gradient-to-r from-[#E066FF] to-[#9B59B6] hover:from-[#D055EE] hover:to-[#8A48A5] text-white font-bold px-8 py-4 rounded-full transition-all text-base mb-5 shadow-md">
+          <button 
+            onClick={() => setModalOpen(true)}
+            className="w-full bg-gradient-to-r from-[#E066FF] to-[#9B59B6] hover:from-[#D055EE] hover:to-[#8A48A5] text-white font-bold px-8 py-4 rounded-full transition-all text-base mb-5 shadow-md cursor-pointer"
+          >
             Buyurtma berish
           </button>
 
