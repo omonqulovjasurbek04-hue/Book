@@ -4,45 +4,76 @@ import ruchka from '../assets/ruchka.png'
 const features = [
   "Sifatli 3D audio orqali",
   "Hech qanday grammatik qoidalarsiz",
-  "So`z yodlashlarsiz",
+  "So'z yodlashlarsiz",
   "Istalgan joyda va istalgan vaqtda",
 ]
 
 const steps = [
   {
     text: <>1. Saytda Buyurtma <br/> qoldiring</>,
-    gradient: "from-[#FF8049] to-[#FA6646]",
+    gradient: "from-[#FF8A65] to-[#FF6B6B]",
     icon: (
-      <svg className="w-10 h-10 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+      <svg
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-full h-full drop-shadow-sm"
+        style={{ transform: 'rotate(-45deg)' }}
+      >
+        
+        <path d="M7 3h10v12l-3 4h-4l-3-4V3z" />
+        
+        <path d="M7 7h10" />
       </svg>
-    )
+    ),
   },
   {
     text: <>2. Biz siz bilan <br/> bog`lanamiz</>,
-    gradient: "from-[#577de2] to-[#396ddf]",
+    gradient: "from-[#577BDE] to-[#3B82F6]",
     icon: (
-      <svg className="w-10 h-10 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-full h-full"
+      >
+        <polyline points="16 2 16 8 22 8"></polyline>
+        <line x1="23" y1="1" x2="16" y2="8"></line>
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-        <path d="M14 2 16 4 14 6 M18 4h-4" />
       </svg>
-    )
+    ),
   },
   {
     text: <>3. Manzilingizga 48 soat ichida <br/> yetkazib beramiz</>,
-    gradient: "from-[#bc48d6] to-[#d840a1]",
+    gradient: "from-[#B947DB] to-[#E9439D]",
     icon: (
-      <svg className="w-10 h-10 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="1" y="3" width="15" height="13" />
-        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-        <circle cx="5.5" cy="18.5" r="2.5" />
-        <circle cx="18.5" cy="18.5" r="2.5" />
-        <path d="M6 3v2 M10 3v2 M14 3v2" />
+      <svg
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-full h-full"
+      >
+        <path d="M2 10h4" />
+        <path d="M1 14h5" />
+        <rect x="8" y="5" width="11" height="11" rx="1" />
+        <path d="M19 10h3l2 3v3h-5v-6z" />
+        <circle cx="11.5" cy="18" r="2.5" />
+        <circle cx="21.5" cy="18" r="2.5" />
       </svg>
-    )
+    ),
   },
 ]
+
 
 export default function PenSection() {
   return (
