@@ -70,15 +70,36 @@ CORS_ALLOWED_ORIGINS=https://SIZNING-FRONTEND.up.railway.app
 
 ---
 
-## 🗄️ 3. MySQL Database Qo'shish
+## 🗄️ 3. MySQL Bazasini (Database) Ulash
 
-1. Loyiha ichida **+ New** → **Database** → **MySQL**
-2. Database yaratilgach, uning **Variables** bo'limidan:
-   - `MYSQLHOST` → Backend `DB_HOST` ga
-   - `MYSQLPORT` → Backend `DB_PORT` ga
-   - `MYSQLDATABASE` → Backend `DB_DATABASE` ga
-   - `MYSQLUSER` → Backend `DB_USERNAME` ga
-   - `MYSQLPASSWORD` → Backend `DB_PASSWORD` ga
+Railway'da loyihangiz ma'lumotlarni saqlashi uchun baza yaratish kerak. Buni juda oson, 2 qadamda bajaramiz:
+
+### 1-Qadam: Railway da MySQL Yaratish
+1. Railway loyihangiz ekranida tepadagi **+ New** katta tugmasini bosing.
+2. Ro'yxatdan **Database** bo'limini tanlang.
+3. Keyin **MySQL** ni tanlang.
+4. Tayyor! Railway sizga darhol o'zining xavfsiz bazasini yaratib beradi.
+
+### 2-Qadam: Baza parollarini Backend'ga yozish
+Endi yaratilgan bazani kodingiz (Backend) tanib olishi kerak. Buning uchun MySQL ning parollarini Backend ga beramiz:
+
+1. Ro'yxatdagi yangi **MySQL** kubigiga bosing va uning **Variables** bo'limiga o'ting. Siz u yerda `MYSQLHOST`, `MYSQLPASSWORD` kabi yozuvlarni ko'rasiz.
+2. Endi ro'yxatdan o'zingizning **Backend** (Laravel) kubigingizga bosing va uning ham **Variables** bo'limiga boring.
+3. Backend variables oynasiga o'ting va quyidagi kodni **"Raw Editor"** orqali to'liq nusxalab tashlang va tenglik ( `=` ) dan keyingi qismlarini MySQL dan olib to'ldiring:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=MySQL_dagi_MYSQLHOST_yozuvi
+DB_PORT=MySQL_dagi_MYSQLPORT_yozuvi
+DB_DATABASE=MySQL_dagi_MYSQLDATABASE_yozuvi
+DB_USERNAME=MySQL_dagi_MYSQLUSER_yozuvi
+DB_PASSWORD=MySQL_dagi_MYSQLPASSWORD_maxfiy_kodi
+```
+
+❗️ **Qisqacha qoida:** MySQL variables oynasida nima berilgan bo'lsa, xuddi shuni nusxalab `=` dan keyin yozasiz. Bo'sh joy qoldirmang.
+
+**⚠️ "No start command detected" (NIXPACKS/Railpack Xatosi):** 
+Ushbu xatolikka duch kelsangiz, endilikda sizga yangi `start.sh` fayli yaratildi. Railway endi bu serverni shu skript orqali qanday boshlashni darhol tushunadi! U `migrate` va `seed` ni xatosiz ishlata oladi.
 
 ---
 
