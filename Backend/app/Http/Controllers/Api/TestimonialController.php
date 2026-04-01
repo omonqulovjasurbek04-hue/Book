@@ -10,7 +10,7 @@ class TestimonialController extends Controller
     public function index()
     {
         return response()->json(
-            Testimonial::where('is_active', true)->get()
+            Testimonial::where('is_active', true)->take(3)->get()
         );
     }
 }
