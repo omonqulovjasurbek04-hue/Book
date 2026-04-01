@@ -1,6 +1,23 @@
+# ==========================================
+# 1-Bosqich: Frontend (React) ni qurish
+# ==========================================
+FROM node:20 AS frontend
+
+WORKDIR /app/Frontend
+# Faqat package.json larni nusxalash (keshlash uchun)
+COPY Frontend/package*.json ./
+RUN npm install
+
+# Qolgan barcha kodlarni nusxalash va tasdiqlash
+COPY Frontend/ ./
+RUN npm run build
+
+# ==========================================
+# 2-Bosqich: Backend (Laravel) ni ishga tushirish
+# ==========================================
 FROM php:8.3-cli
 
-# Install system dependencies
+# Tizim kutubxonalarini o'rnatish
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -19,24 +36,23 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip sodium
 
-# Get Composer
+# Composer ni yuklash
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /app
 
-# Copy application files (buting loyihani ko'chirish)
+# Butun loyihani nusxalash
 COPY . .
 
-# Backend qismiga o'tamiz
-WORKDIR /app/Backend
+# Frontend build qilingan fayllarini avtomat Laravel public papkasiga o'tkazish
+COPY --from=frontend /app/Frontend/dist /app/Backend/public
 
-# Install PHP dependencies
+# Backend sozlamalari
+WORKDIR /app/Backend
 RUN composer install --no-dev --optimize-autoloader
 
-# Railway uzatuvchi PORT ni muhit o'zgaruvchisiga o'rnatish
 ENV PORT=8000
 EXPOSE ${PORT}
 
-# Ilovani va bazani Railway da ishga tushirish (Backend ichidagi start.sh)
+# Ilovani ishga tushirish
 CMD ["bash", "start.sh"]
