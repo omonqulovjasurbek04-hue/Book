@@ -25,8 +25,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /app
 
-# Copy application files
+# Copy application files (buting loyihani ko'chirish)
 COPY . .
+
+# Backend qismiga o'tamiz
+WORKDIR /app/Backend
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
@@ -35,5 +38,5 @@ RUN composer install --no-dev --optimize-autoloader
 ENV PORT=8000
 EXPOSE ${PORT}
 
-# Ilovani va bazani Railway da ishga tushirish (biz yaratgan start.sh)
+# Ilovani va bazani Railway da ishga tushirish (Backend ichidagi start.sh)
 CMD ["bash", "start.sh"]
