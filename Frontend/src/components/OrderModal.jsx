@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
+import api from '../api'
 import books1 from '../assets/Books1.png'
 import books2 from '../assets/Books2.png'
 import books3 from '../assets/Books3.png'
@@ -26,18 +27,27 @@ export default function OrderModal() {
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
+    try {
+      await api.post('/orders', {
+        name: formData.name,
+        phone: formData.phone,
+        comment: formData.agreed ? "Barcha yoshdagi shu tillarga qiziqadigan barchaga kurslarimiz - Checkbox tanlangan" : ""
+      })
       setSuccess(true)
       setFormData({ name: '', phone: '', agreed: false })
-      setLoading(false)
       setTimeout(() => {
         setSuccess(false)
         setModalOpen(false)
       }, 2000)
-    }, 800)
+    } catch (error) {
+      console.error("Buyurtma yuborishda xatolik:", error)
+      alert("Xatolik yuz berdi. Iltimos qayta urinib ko'ring.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
