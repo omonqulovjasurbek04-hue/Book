@@ -140,8 +140,7 @@ export default function BooksSection() {
                       ? 'ring-4 ring-purple-500 scale-110 shadow-lg' 
                       : 'border border-gray-100 shadow-sm hover:scale-105 hover:ring-2 hover:ring-purple-300'
                   }`}
-                  title={flag.country}
-                >
+                  title={flag.country}>
                   <img 
                     src={`https://flagcdn.com/w80/${flag.code}.png`} 
                     alt={flag.country} 
