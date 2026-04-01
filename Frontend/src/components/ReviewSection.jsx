@@ -1,46 +1,25 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import userImg from '../assets/img.png'
-
-const reviews = [
-  {
-    id: 1,
-    name: "Abduyaminov Akmal",
-    product: "Children English book 1",
-    text: "Barcha yoshdaki shu tillarga qiziqadigan barchaga kurslarimiz foydali bo'ladi",
-    image: userImg
-  },
-  {
-    id: 2,
-    name: "Abduyaminov Akmal",
-    product: "Children English book 1",
-    text: "Barcha yoshdaki shu tillarga qiziqadigan barchaga kurslarimiz foydali bo'ladi",
-    image: userImg
-  },
-  {
-    id: 3,
-    name: "Abduyaminov Akmal",
-    product: "Children English book 1",
-    text: "Barcha yoshdaki shu tillarga qiziqadigan barchaga kurslarimiz foydali bo'ladi",
-    image: userImg
-  },
-  {
-    id: 4,
-    name: "Abduyaminov Akmal",
-    product: "Children English book 1",
-    text: "Barcha yoshdaki shu tillarga qiziqadigan barchaga kurslarimiz foydali bo'ladi",
-    image: userImg
-  },
-  {
-    id: 5,
-    name: "Abduyaminov Akmal",
-    product: "Children English book 1",
-    text: "Barcha yoshdaki shu tillarga qiziqadigan barchaga kurslarimiz foydali bo'ladi",
-    image: userImg
-  }
-]
+import api from '../api'
 
 export default function ReviewSection() {
   const sliderRef = useRef(null)
+  const [reviews, setReviews] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  // 1. Backenddan ma'lumotlarni tortish uchun useEffect hook'i
+  useEffect(() => {
+    api.get('/testimonials') // Bizning Laravel dagi Route::get('/testimonials', ...) api manziliga so'rov
+      .then(response => {
+        // Backend'dan kelgan ma'lumotni Local State ga saqlaymiz
+        setReviews(response.data)
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error("Fikrlar massivini olishda xatolik:", error)
+        setLoading(false)
+      })
+  }, [])
 
   const slideLeft = () => {
     if (sliderRef.current) {
@@ -94,7 +73,12 @@ export default function ReviewSection() {
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {reviews.map((rev) => (
+          {loading ? (
+            <p className="text-center w-full text-purple-600">Yuklanmoqda...</p>
+          ) : reviews.length === 0 ? (
+            <p className="text-center w-full text-gray-400">Hozircha sharhlar yo'q</p>
+          ) : (
+            reviews.map((rev) => (
             <div 
               key={rev.id} 
               className="snap-start flex-shrink-0 w-[100%] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-[#FCFAFF] p-6 pb-12 md:p-8 md:pb-14 rounded-[24px] relative overflow-hidden group hover:shadow-[0_10px_30px_rgba(185,85,202,0.05)] transition-all duration-300"
@@ -106,19 +90,20 @@ export default function ReviewSection() {
               
               <div className="flex items-center gap-4 mb-6 relative z-10">
                 <div className="w-[50px] h-[50px] md:w-[54px] md:h-[54px] rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
-                  <img src={rev.image} className="w-full h-full object-cover" alt={rev.name} />
+                  <img src={rev.image ? rev.image : userImg} className="w-full h-full object-cover" alt={rev.name} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-[#2b2b2b] text-[13px] md:text-[14px]">{rev.name}</h4>
-                  <p className="text-[#8964C0] text-[12px] md:text-[13px] font-medium mt-0.5">{rev.product}</p>
+                  <p className="text-[#8964C0] text-[12px] md:text-[13px] font-medium mt-0.5">{rev.course_name}</p>
                 </div>
               </div>
               
               <p className="text-[#333] text-[13px] md:text-[14px] leading-[1.6] font-medium relative z-10 w-[95%]">
-                {rev.text}
+                {rev.message_uz}
               </p>
             </div>
-          ))}
+           ))
+          )}
         </div>
 
         {/* Mobile navigatsiya tugmalari (karta ostida markazlashgan) */}
