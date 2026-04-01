@@ -104,7 +104,7 @@ export default function BooksSection() {
       if (direction === 'next') return Math.min(prev + 1, books.length - 2)
       return Math.max(prev - 1, 0)
     })
-    setActiveMobileBook(null) // Hide bottom bar when scrolling
+    setActiveMobileBook(null)
   }
 
   return (
@@ -143,13 +143,6 @@ export default function BooksSection() {
               )
             })}
           </div>
-
-          <button 
-            onClick={() => setModalOpen(true)}
-            className="bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-medium px-8 py-3.5 rounded-full transition-all duration-300 text-sm shadow-[0_4px_12px_rgba(186,67,205,0.3)] w-max cursor-pointer"
-          >
-            Buyurtma berish
-          </button>
         </div>
 
         <div className="flex-1 grid grid-cols-3 gap-5 lg:gap-8 overflow-hidden pt-2">
@@ -197,10 +190,8 @@ export default function BooksSection() {
         </div>
       </div>
 
-      {/* ================= MOBIL KORINISH ================= */}
       <div className="md:hidden flex flex-col pt-0 pb-4 px-1">
         
-        {/* Yuqori qism: Sarlavha va Tugma */}
         <div className="flex justify-between items-center mb-5">
           <div className="flex flex-col">
             <h2 className="text-[20px] font-bold text-[#51368a] leading-tight mb-1">
@@ -218,7 +209,6 @@ export default function BooksSection() {
           </button>
         </div>
 
-        {/* Bayroqlar qatori */}
         <div className="flex gap-3 overflow-x-auto pt-2 pb-6 px-2 -mx-2 mb-2 flex-nowrap" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {flags.map((flag, idx) => {
             const isActive = selectedLang.code === flag.code;
@@ -244,7 +234,6 @@ export default function BooksSection() {
           })}
         </div>
 
-        {/* Kitoblar Karuseli */}
         <div className="relative w-full overflow-hidden mb-6">
           <div 
             className="flex transition-transform duration-300 ease-in-out gap-4"
@@ -258,7 +247,6 @@ export default function BooksSection() {
                 onClick={() => setActiveMobileBook(activeMobileBook === idx ? null : idx)}
                 className={`w-[calc(50%-8px)] shrink-0 ${book.bg} rounded-[20px] pb-5 pt-5 flex flex-col items-center shadow-sm relative overflow-hidden transition-all duration-300`}
               >
-                {/* Kitob kitobiga yorug'lik effektli bezak (ixtiyoriy) */}
                 <div className="absolute top-0 right-0 w-8 h-32 bg-white/30 skew-x-[30deg] translate-x-12"></div>
                 
                 <div className={`w-full flex items-center justify-center mb-4 xl:h-auto h-[120px] transition-transform duration-300 ${activeMobileBook === idx ? '-translate-y-4' : 'translate-y-0'}`}>
@@ -274,7 +262,6 @@ export default function BooksSection() {
                   </p>
                 </div>
 
-                {/* Mobil uchun pastki panel (bosilganda chiqadi) */}
                 <div 
                   className={`absolute bottom-0 left-0 w-full h-11 bg-black/5 flex border-t border-white/60 transition-transform duration-300 z-20 ${
                     activeMobileBook === idx ? 'translate-y-0' : 'translate-y-full'
@@ -302,7 +289,6 @@ export default function BooksSection() {
           </div>
         </div>
 
-        {/* Arrow tugmalari (Karusel boshqaruvi) */}
         <div className="flex justify-center items-center gap-4">
           <button 
             onClick={() => scrollCards('prev')} 

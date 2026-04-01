@@ -28,32 +28,32 @@ export default function OrderForm() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 min-h-auto flex items-stretch">
         
         {/* Chap blok: Chegirma ma'lumoti */}
-        <div className="bg-[#eaf1ff] rounded-[20px] p-6 pb-[250px] md:pb-12 md:p-12 flex flex-col relative overflow-hidden min-h-[440px] md:min-h-[559px] w-full">
+        <div className="bg-[#eaf1ff] border-2 border-[#1E90FF] rounded-[20px] p-6 pb-[250px] md:pb-12 md:p-12 flex flex-col relative overflow-hidden min-h-[440px] md:min-h-[559px] w-full">
           
           {/* Orqadagi pushti foni (Ellipse 307) - Figmadan olingan gradient va piksellar */}
           <div className="absolute top-[200px] -right-[100px] md:top-[269px] md:-right-[169px] w-[350px] md:w-[529px] aspect-square bg-gradient-to-b from-[#e98f8e] to-[#eeae8c] rounded-full pointer-events-none z-0 hidden md:block"></div>
 
           <div className="z-10 relative flex flex-col h-full">
-            <h3 className="text-[#594285] text-[22px] md:text-[38px] font-bold uppercase leading-tight tracking-wide">
+            <h3 className="text-[#594285] text-[22px] md:text-[38px] font-semibold uppercase leading-tight tracking-wide">
               SIZNING
             </h3>
             {/* Ostiga aniq chegaralangan chiziq (faqat desktop da) */}
-            <div className="flex items-center gap-1.5 md:gap-3 mt-0.5 md:mt-1 border-b-0 md:border-b-2 border-[#b5a7db] pb-0 md:pb-2 w-max max-w-full">
-              <span className="text-[#594285] text-[22px] md:text-[38px] font-bold uppercase tracking-wide">CHEGIRMANGIZ</span>
-              <span className="text-[#f1957c] text-[38px] md:text-[75px] font-bold leading-none">10%</span>
+            <div className="flex items-end gap-1.5 md:gap-3 border-b-2 border-[#594285] pb-1 w-max">
+              <span className="text-[#594285] text-[22px] md:text-[38px] font-semibold uppercase tracking-wide leading-none">CHEGIRMANGIZ</span>
+              <span className="text-[#e29381] text-[40px] md:text-[75px] font-bold leading-none translate-y-[4px]">10%</span>
             </div>
             
-            <div className="text-gray-800 text-[13.5px] md:text-[14px] mt-6 md:mt-10 mb-8 space-y-2 font-medium">
+            <div className="text-gray-800 text-[13.5px] md:text-[14px] mt-6 md:mt-8 mb-6 space-y-2 font-medium relative z-30">
               <p>Chegirma boshlanadi: <span className="font-bold text-black">25 mart</span></p>
               <p>Chegirma tugaydi: <span className="font-bold text-black">24 aprel</span></p>
             </div>
 
-            <div className="mt-2 text-left w-full h-full flex flex-col justify-start">
-              <p className="text-[#674f98] font-bold text-[17px] md:text-[24px] mb-2 uppercase tracking-wide">Audio kurs narxi</p>
-              <p className="text-[#f1957c] font-medium line-through decoration-1 opacity-70 text-[18px] md:text-[18px] mb-0.5">
+            <div className="mt-2 md:mt-4 text-left w-full h-full flex flex-col justify-start relative z-30">
+              <p className="text-[#594285] font-bold text-[18px] md:text-[26px] mb-2 tracking-wide">Audio kurs narxi</p>
+              <p className="text-[#e29381] font-semibold line-through decoration-1 text-[18px] md:text-[22px] mb-1">
                 1.200.000 so'm
               </p>
-              <p className="text-[#f1957c] text-[28px] md:text-[36px] font-bold tracking-tight">
+              <p className="text-[#f76a3b] text-[28px] md:text-[36px] font-bold tracking-tight">
                 533.000 so'm
               </p>
             </div>

@@ -6,7 +6,7 @@ import { ModalContext } from '../App'
 
 export default function OrderModal() {
   const { isModalOpen, setModalOpen } = useContext(ModalContext)
-  const [formData, setFormData] = useState({ name: '', phone: '', book: '', agreed: false })
+  const [formData, setFormData] = useState({ name: '', phone: '', agreed: false })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -31,7 +31,7 @@ export default function OrderModal() {
     setLoading(true)
     setTimeout(() => {
       setSuccess(true)
-      setFormData({ name: '', phone: '', book: '', agreed: false })
+      setFormData({ name: '', phone: '', agreed: false })
       setLoading(false)
       setTimeout(() => {
         setSuccess(false)
@@ -91,15 +91,6 @@ export default function OrderModal() {
                 onChange={handleChange}
                 placeholder="Telefon"
                 required
-                className="w-full bg-transparent border-0 border-b border-[#a48abf] px-0 py-2.5 text-white placeholder-[#b8a2d1] focus:ring-0 focus:border-white transition-colors text-[15px]"
-              />
-              
-              <input
-                type="text"
-                name="book"
-                value={formData.book}
-                onChange={handleChange}
-                placeholder="Kitobni tanlang"
                 className="w-full bg-transparent border-0 border-b border-[#a48abf] px-0 py-2.5 text-white placeholder-[#b8a2d1] focus:ring-0 focus:border-white transition-colors text-[15px]"
               />
 
