@@ -12,7 +12,4 @@ Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{book}', [BookController::class, 'show']);
 
 Route::post('/orders', [OrderController::class, 'store']);
-
 Route::get('/testimonials', [TestimonialController::class, 'index']);
-Route::get('/features', [FeatureController::class, 'index']);
-Route::get('/settings', [SettingController::class, 'index']);

@@ -13,8 +13,8 @@ class OrderController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:30'],
-            'book_id' => ['required', 'exists:books,id'],
-            'lang' => ['required', 'in:uz,ru'],
+            'book_id' => ['nullable', 'exists:books,id'],
+            'lang' => ['nullable', 'in:uz,ru'],
             'comment' => ['nullable', 'string'],
         ]);
 
