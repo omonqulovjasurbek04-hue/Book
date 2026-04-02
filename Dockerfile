@@ -2,57 +2,57 @@
 # 1-Bosqich: Frontend (React) ni qurish
 # ==========================================
 FROM node:20 AS frontend
-
 WORKDIR /app/Frontend
-# Faqat package.json larni nusxalash (keshlash uchun)
+
+# Faqat package fayllarini olinadi (keshlash strategiyasi)
 COPY Frontend/package*.json ./
 RUN npm install
 
-# Qolgan barcha kodlarni nusxalash va tasdiqlash
+# Frontend barcha fayllarini ko'chirib, uni "bitta server" muhiti uchunkompilyatsiya qilish
 COPY Frontend/ ./
+# Ilova bitta domenda ishlashi sababli, API manzili shu serverning ichidagi /api yo'li bo'ladi
+ENV VITE_API_URL=/api
 RUN npm run build
 
 # ==========================================
-# 2-Bosqich: Backend (Laravel) ni ishga tushirish
+# 2-Bosqich: Backend (Laravel) + Nginx server bittada
 # ==========================================
-FROM php:8.3-cli
+FROM php:8.3-fpm
 
-# Tizim kutubxonalarini o'rnatish
+# Server ishlashi uchun barcha kerakli paketlarni yozish
 RUN apt-get update && apt-get install -y \
+    nginx \
+    gettext-base \
     git \
     curl \
-    unzip \
-    zip \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libzip-dev \
-    libsodium-dev \
-    libpq-dev \
+    zip \
+    unzip \
     default-mysql-client \
-    default-libmysqlclient-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd zip sodium
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Composer ni yuklash
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+WORKDIR /var/www
 
-# Butun loyihani nusxalash
-COPY . .
+# Backend (Laravel) fayllarini asosiy Server papkasiga nusxalash
+COPY Backend/ ./
+RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Frontend build qilingan fayllarini avtomat Laravel public papkasiga o'tkazish
-COPY --from=frontend /app/Frontend/dist /app/Backend/public
+# **MUHIM:** 1-bosqichdagi React build fayllarini to'g'ridan to'g'ri Laravel ichidagi public/ ga nusxalash
+# Endi Laravel va React bitta Nginx domenda yashaydi!
+COPY --from=frontend /app/Frontend/dist/ /var/www/public/
 
-# Backend sozlamalari
-WORKDIR /app/Backend
-RUN composer install --no-dev --optimize-autoloader
+# Nginx konfiguratsiya andozasini o'tkazish
+COPY Backend/nginx.conf /etc/nginx/conf.d/default.conf.template
 
-ENV PORT=8000
-EXPOSE ${PORT}
+# Fayllarni to'g'irlash
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache \
+    && chmod +x start.sh
 
-# Ilovani ishga tushirish
-CMD ["bash", "start.sh"]
+# Oldingi yozgan muvaffaqiyatli ishga tushirish skriptidan foydalanish
+CMD ["./start.sh"]

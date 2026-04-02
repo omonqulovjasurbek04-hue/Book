@@ -1,52 +1,42 @@
-# 🚀 Railway.com ga Loyihani Yuklash: To'liq Qo'llanma
+# 🚀 Railway.com ga Loyihani Yuklash (Optimal Docker Server)
 
-Ushbu qo'llanma orqali siz **Laravel (Backend)** va **React + Tailwind (Frontend)** loyihangizni [Railway.app](https://railway.app/) serveriga yuklaysiz.
+Ushbu qo'llanma orqali siz **Laravel (Backend)** va **React + Tailwind (Frontend)** loyihangizni [Railway.app](https://railway.app/) serveriga **to'liq optimallashtirilgan yorug'lik tezligidagi Docker Nginx serverlari** orqali yuklaysiz. (Faqatgina ishlab chiqish uchun mo'ljallangan `artisan serve` dan voz kechildi).
 
-**Repo:** `github.com/omonqulovjasurbek04-hue/Book`  
-**Branch:** `Jasurbek`
-
----
-
-## ✅ Tayyor Bo'lgan Narsalar
-
-| Qadam | Status |
-|-------|--------|
-| `.gitignore` fayllar to'g'rilandi | ✅ |
-| `vendor/`, `node_modules/`, `.env` gitdan tozalandi | ✅ |
-| `Frontend build` xatosiz ishlaydi | ✅ |
-| GitHub ga push qilindi | ✅ |
-| `railway.json` Backend da mavjud | ✅ |
-| `railway.json` Frontend da mavjud | ✅ |
-| CORS sozlamasi tayyor (`config/cors.php`) | ✅ |
-| API client tayyor (`src/api.js`) | ✅ |
+**Repo:** `github.com/omonqulovjasurbek04-hue/Book`
 
 ---
 
-## 🔧 1. Railway.com ga Kirish
+## 🏗 Yangi Arxitektura (Backend & Frontend)
 
-1. [railway.com](https://railway.com) saytiga boring
-2. **Login with GitHub** ni bosing
-3. GitHub akkauntingiz bilan kiring
+Loyiha hozir mutlaqo mustaqil 2 ta serverga ajratildi:
+- **Backend**: `php:8.3-fpm` va `nginx` orqali ishlaydi. Ma'lumotlar bazasi migratsiyalari avtomatlashgan holda tez ishlashi ta'minlandi.
+- **Frontend**: Vite orqali React kompilyatsiya bo'ladi (`dist` papkaga) va eng yengil `nginx:alpine` orqali xizmat ko'rsatib, SPA (Single Page Application) routing (sahifani yangilaganda uzilmaslik) masalalari xatosiz hal etildi, siqish (gzip) yoqildi.
 
 ---
 
-## ⚙️ 2. Backend (Laravel) Service Yaratish
+## 🔧 1. Railway.com da Loyiha Yaratish
 
-1. **New Project** → **Deploy from GitHub Repo**
-2. `omonqulovjasurbek04-hue/Book` repo ni tanlang
-3. **Settings** bo'limida:
-   - **Root Directory:** `Backend`
-   - Builder va Start command `railway.json` dan avtomatik olinadi:
-     ```json
-     {
-       "build": { "builder": "NIXPACKS" },
-       "deploy": {
-         "startCommand": "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
-       }
-     }
-     ```
+1. [railway.com](https://railway.com) saytiga boring va GitHub orqali kiring.
+2. Tepadagi katta **+ New Project** -> **Deploy from GitHub repo** orqali loyihani tanlang.
 
-4. **Variables** bo'limiga quyidagilarni qo'shing:
+---
+
+## 🐘 2. Ma'lumotlar Bazasini (MySQL) Yaratish
+
+Backend uchun doimiy ma'lumotlar bazasi (Database) kerak.
+
+1. Loyiha oynasida **+ New** -> **Database** -> **MySQL** bosing.
+2. MySQL tayyor bo'ladi. Uning ustiga bosing, `Variables` (O'zgaruvchilar) bo'limiga kirib u yerdagi `MYSQLHOST`, `MYSQLUSER` kabi o'zgaruvchilarga e'tibor qarating - endi ushbu kodlarni Backend loyihangizga ulashingiz kerak bo'ladi.
+
+---
+
+## ⚙️ 3. Backend (Laravel) Service Yaratish
+
+1. Loyiha oynasida **+ New** -> **GitHub Repo** -> yana shu reponi (Book) tanlang.
+2. Kubik (Service) ustiga bosing, o'ng tarafdan **Settings** bo'limiga o'ting.
+3. **Root Directory:** ga `Backend` deb yozing.
+4. U yerda **Build** avtomatik **Dockerfile** orqali aniqlanadi, qo'shimcha start skriptlarini yozish shart emas! Skript avtomat migratsiya bajaradi!
+5. **Variables** bo'limiga o'ting va **Raw Editor** orqali bazangiz parametrlarini qo'shing:
 
 ```env
 APP_ENV=production
@@ -55,131 +45,42 @@ APP_DEBUG=false
 APP_URL=https://SIZNING-BACKEND.up.railway.app
 
 DB_CONNECTION=mysql
-DB_HOST=[Railway MySQL Host]
-DB_PORT=[Railway MySQL Port]
-DB_DATABASE=[Database Nomi]
-DB_USERNAME=[Username]
-DB_PASSWORD=[Parol]
-
-CORS_ALLOWED_ORIGINS=https://SIZNING-FRONTEND.up.railway.app
-```
-
-> [!TIP]
-> **Database qo'shish:** Loyihada **+ New** → **Database** → **MySQL** bosing.  
-> Host, Port, Username, Password avtomatik beriladi — ularni Variables ga nusxalang.
-
----
-
-## 🗄️ 3. MySQL Bazasini (Database) Ulash
-
-Railway'da loyihangiz ma'lumotlarni saqlashi uchun baza yaratish kerak. Buni juda oson, 2 qadamda bajaramiz:
-
-### 1-Qadam: Railway da MySQL Yaratish
-1. Railway loyihangiz ekranida tepadagi **+ New** katta tugmasini bosing.
-2. Ro'yxatdan **Database** bo'limini tanlang.
-3. Keyin **MySQL** ni tanlang.
-4. Tayyor! Railway sizga darhol o'zining xavfsiz bazasini yaratib beradi.
-
-### 2-Qadam: Baza parollarini Backend'ga yozish
-Endi yaratilgan bazani kodingiz (Backend) tanib olishi kerak. Buning uchun MySQL ning parollarini Backend ga beramiz:
-
-1. Ro'yxatdagi yangi **MySQL** kubigiga bosing va uning **Variables** bo'limiga o'ting. Siz u yerda `MYSQLHOST`, `MYSQLPASSWORD` kabi yozuvlarni ko'rasiz.
-2. Endi ro'yxatdan o'zingizning **Backend** (Laravel) kubigingizga bosing va uning ham **Variables** bo'limiga boring.
-3. Backend variables oynasiga o'ting va quyidagi kodni **"Raw Editor"** orqali to'liq nusxalab tashlang va tenglik ( `=` ) dan keyingi qismlarini MySQL dan olib to'ldiring:
-
-```env
-DB_CONNECTION=mysql
 DB_HOST=MySQL_dagi_MYSQLHOST_yozuvi
 DB_PORT=MySQL_dagi_MYSQLPORT_yozuvi
 DB_DATABASE=MySQL_dagi_MYSQLDATABASE_yozuvi
 DB_USERNAME=MySQL_dagi_MYSQLUSER_yozuvi
 DB_PASSWORD=MySQL_dagi_MYSQLPASSWORD_maxfiy_kodi
+
+CORS_ALLOWED_ORIGINS=https://SIZNING-FRONTEND.up.railway.app
 ```
-
-❗️ **Qisqacha qoida:** MySQL variables oynasida nima berilgan bo'lsa, xuddi shuni nusxalab `=` dan keyin yozasiz. Bo'sh joy qoldirmang.
-
-**⚠️ "No start command detected" (NIXPACKS/Railpack Xatosi):** 
-Ushbu xatolikka duch kelsangiz, endilikda sizga yangi `start.sh` fayli yaratildi. Railway endi bu serverni shu skript orqali qanday boshlashni darhol tushunadi! U `migrate` va `seed` ni xatosiz ishlata oladi.
+*(Yuqoridagi URL'larni hozir o'zimiz olamiz va to'g'irlaymiz)*
 
 ---
 
 ## ⚛️ 4. Frontend (React) Service Yaratish
 
-1. Loyihada **+ New** → **GitHub Repo** → Yana `Book` tanlang
-2. **Settings** bo'limida:
-   - **Root Directory:** `Frontend`
-   - Build va Deploy `railway.json` dan avtomatik olinadi:
-     ```json
-     {
-       "build": {
-         "builder": "NIXPACKS",
-         "buildCommand": "npm install && npm run build"
-       },
-       "deploy": { "staticDir": "dist" }
-     }
-     ```
-
-3. **Variables** bo'limiga qo'shing:
+1. Yana **+ New** boshqadan bosib -> **GitHub Repo** -> Reopni tanlang. 
+2. Yaratilgan yangi service'ning **Settings** qismida:
+   - **Root Directory:** ga `Frontend` deb yozing.
+   - Barcha jarayon Nginx Alpine asosidagi yangi `Dockerfile` ga tayanadi. (SPA fallback, server caching hammasi bor)
+3. **Variables** bo'limiga kirib qo'shing:
 
 ```env
 VITE_API_URL=https://SIZNING-BACKEND.up.railway.app/api
 ```
-
-> [!WARNING]
-> `VITE_API_URL` oxirida `/api` bo'lishi **SHART**! Aks holda Frontend Backend ga ulana olmaydi.
+*(Tepadagi backend manzilingizni aynan /api bilan tugaydigan xolida).*
 
 ---
 
-## 🌐 5. Domain Sozlash
+## 🌐 5. Domain'larni Sozlash & Biriktirish
 
-Har bir service uchun:
-1. Service ni bosing → **Settings** → **Networking**
-2. **Generate Domain** bosing
-3. Berilgan URL ni yozib oling:
-   - Backend: `https://book-backend-xxxx.up.railway.app`
-   - Frontend: `https://book-frontend-xxxx.up.railway.app`
-4. **MUHIM:** Backend `CORS_ALLOWED_ORIGINS` va Frontend `VITE_API_URL` ga shu URL larni qo'ying!
+Oxirgi qadam: Ularga Internet manzili berib bir-biriga ulash.
 
----
+1. Ikkala blok uchun (Backend va Frontend) ustiga bosib -> **Settings** -> **Networking** qismidan **Generate Domain** qiling.
+2. Backend uchun olingan URL'ni Frontend'ning **Variables** qismidagi `VITE_API_URL` ga `/api` tugatib yozing.
+3. Frontend uchun olingan URL'ni Backend'ning **Variables** qismidagi `CORS_ALLOWED_ORIGINS` ga ulang.
+4. Serverlar avtomat qariyb 3-4 daqiqada qaytadan yurgiziladi (deploy bo'ladi) va mutlaqo **prod** xolatiga optimal Nginx bo'lib hizmat qila boshlaydi!
 
-## ✅ 6. Tekshirish
+> Xato yoki muammo bo'lsa har bir blokni **View Logs** (jurnal) joyidan kuzatishingiz mumkin. Yordam kerak bo'lsa aytasiz!
 
-| Test | Kutilgan natija |
-|------|----------------|
-| `https://backend-url/api/books` | JSON kitoblar ro'yxati |
-| `https://frontend-url` | Sayt ochiladi |
-| Buyurtma formasi | Backend ga yetkazadi |
-| CORS xatosi yo'q | Console da xato yo'q |
-
-### Xato bo'lsa:
-- **View Logs** orqali xatoni ko'ring
-- **Variables** to'g'ri ekanligini tekshiring
-- `CORS_ALLOWED_ORIGINS` ni tekshiring (frontend URL to'g'ri yozilganmi)
-
----
-
-## 📁 Loyiha Strukturasi
-
-```
-Book/
-├── .gitignore
-├── Backend/
-│   ├── .gitignore
-│   ├── .env.example
-│   ├── railway.json        ← Deploy config
-│   ├── composer.json
-│   ├── config/cors.php     ← CORS
-│   ├── routes/api.php      ← API endpoints
-│   └── ...
-└── Frontend/
-    ├── .gitignore
-    ├── .env.production
-    ├── railway.json         ← Deploy config
-    ├── package.json
-    ├── src/api.js           ← Backend API client
-    └── ...
-```
-
----
-
-Omad! 🎉 Muammo bo'lsa, Railway **View Logs** dan xatoni ko'ring.
+🚀 Omad!

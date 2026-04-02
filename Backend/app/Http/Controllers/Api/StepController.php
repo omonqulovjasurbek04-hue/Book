@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Testimonial;
+use App\Models\Step;
 
-class TestimonialController extends Controller
+class StepController extends Controller
 {
     public function index()
     {
         return response()->json(
-            Testimonial::where('is_active', true)->get()
+            Step::where('is_active', true)->orderBy('step_number', 'asc')->get()
         );
     }
 }
