@@ -44,7 +44,6 @@ export default function OrderModal() {
       }, 2000)
     } catch (error) {
       console.error("Buyurtma yuborishda xatolik:", error)
-      alert("Xatolik yuz berdi. Iltimos qayta urinib ko'ring.")
     } finally {
       setLoading(false)
     }
@@ -77,12 +76,7 @@ export default function OrderModal() {
             BUYURTMA BERISH UCHUN FORMANI TO'LDIRING
           </h2>
 
-          {success ? (
-            <div className="p-4 bg-green-500/20 border border-green-500 rounded-xl text-green-100 font-semibold mb-6">
-              Buyurtmangiz muvaffaqiyatli qabul qilindi!
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-7 w-full md:max-w-[90%]">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-7 w-full md:max-w-[90%]">
               
               <input
                 type="text"
@@ -119,18 +113,23 @@ export default function OrderModal() {
                 </label>
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 flex flex-col">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-[200px] bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-bold py-3.5 rounded-full shadow-[0_4px_15px_rgba(186,67,205,0.4)] transition-all disabled:opacity-70 text-[15px]"
+                  className="inline-block w-[200px] bg-gradient-to-r from-[#ba43cd] to-[#d846b8] hover:opacity-90 text-white font-bold py-3.5 rounded-full shadow-[0_4px_15px_rgba(186,67,205,0.4)] transition-all disabled:opacity-70 text-[15px]"
                 >
                   {loading ? 'Kuting...' : 'Buyurtma berish'}
                 </button>
+                {success && (
+                  <div className="mt-4 text-[#2ECC71] text-[18px] font-bold w-[200px] text-center">
+                    Tasdiqlandi
+                  </div>
+                )}
               </div>
 
             </form>
-          )}
+
         </div>
 
         {/* O'ng blok: Rasmlar */}
