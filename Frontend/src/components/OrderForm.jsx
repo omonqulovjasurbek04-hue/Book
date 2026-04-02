@@ -27,7 +27,6 @@ export default function OrderForm() {
       setFormData({ name: '', phone: '', agreed: false })
     } catch (error) {
       console.error("Buyurtma yuborishda xatolik:", error)
-      alert("Xatolik yuz berdi. Iltimos qayta urinib ko'ring.")
     } finally {
       setLoading(false)
     }
@@ -109,11 +108,7 @@ export default function OrderForm() {
             FORMANI TO'LDIRING
           </h3>
           
-          {success && (
-            <div className="mb-6 p-3 bg-green-100 text-green-700 rounded-lg text-sm font-semibold">
-              Buyurtmangiz qabul qilindi! O'zgarishlarsiz bog'lanamiz.
-            </div>
-          )}
+          {/* Success messages moved below the button */}
 
           <form onSubmit={handleSubmit} className="flex flex-col flex-grow">
             
@@ -163,8 +158,13 @@ export default function OrderForm() {
               disabled={loading}
               className="mt-10 md:mt-12 w-full sm:w-[240px] bg-gradient-to-r from-[#943bd6] to-[#da43c4] hover:opacity-90 text-white font-bold py-[14px] md:py-[16px] rounded-full text-[15px] md:text-[16px] shadow-md transition-all focus:outline-none disabled:opacity-70"
             >
-              Buyurtma berish
+              {loading ? "Yuborilmoqda..." : "Buyurtma berish"}
             </button>
+            {success && (
+              <div className="mt-4 text-[#2ECC71] text-[18px] font-bold text-center w-full sm:w-[240px]">
+                Tasdiqlandi
+              </div>
+            )}
           </form>
         </div>
 
