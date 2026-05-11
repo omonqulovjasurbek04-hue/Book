@@ -15,7 +15,7 @@ return new class extends Migration
     $table->id();
     $table->string('name');
     $table->string('phone');
-    $table->foreignId('book_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('book_id')->nullable()->constrained()->cascadeOnDelete();
     $table->string('lang')->default('uz');
     $table->text('comment')->nullable();
     $table->string('status')->default('new');

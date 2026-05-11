@@ -1,0 +1,22 @@
+{
+  "name": "book-fullstack",
+  "version": "1.0.0",
+  "description": "Book Learning Platform - Backend (Laravel) + Frontend (Vite + Tailwind)",
+  "scripts": {
+    "dev": "concurrently -k -n \"BACKEND,FRONTEND\" -c \"cyan,magenta\" \"cd Backend && php artisan serve --host=127.0.0.1 --port=8000\" \"cd Frontend && npm run dev\"",
+    "build": "cd Frontend && npm run build",
+    "start": "cd Frontend && npm run build && cd ../Backend && php artisan serve --host=127.0.0.1 --port=8000",
+    "backend": "cd Backend && php artisan serve --host=127.0.0.1 --port=8000",
+    "frontend": "cd Frontend && npm run dev",
+    "install-all": "cd Backend && composer install --ignore-platform-reqs && cd ../Frontend && npm install",
+    "migrate": "cd Backend && php artisan migrate --force",
+    "seed": "cd Backend && php artisan db:seed --force",
+    "setup": "npm run install-all && npm run migrate && npm run seed && npm run build"
+  },
+  "keywords": ["laravel", "vite", "tailwindcss"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
